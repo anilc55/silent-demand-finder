@@ -1,24 +1,92 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <title>Silent Demand Finder</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Silent Demand Finder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:linear-gradient(135deg,#020617,#0f172a);
+  color:#e5e7eb;
+}
+.container{
+  max-width:600px;
+  margin:40px auto;
+  padding:20px;
+}
+h1{
+  text-align:center;
+  color:#22c55e;
+}
+p{
+  text-align:center;
+  opacity:0.9;
+}
+input{
+  width:100%;
+  padding:14px;
+  border-radius:8px;
+  border:none;
+  margin-top:20px;
+  font-size:16px;
+}
+button{
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  background:#22c55e;
+  border:none;
+  border-radius:8px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.card{
+  background:#020617;
+  border-left:4px solid #22c55e;
+  padding:14px;
+  border-radius:8px;
+  margin-top:15px;
+}
+.tag{
+  color:#22c55e;
+  font-size:12px;
+  font-weight:bold;
+}
+.score{
+  margin-top:6px;
+  font-size:13px;
+  opacity:0.8;
+}
+.footer{
+  text-align:center;
+  font-size:12px;
+  opacity:0.6;
+  margin-top:30px;
+}
+</style>
 </head>
+
 <body>
-
 <div class="container">
-  <h1>🔍 Silent Demand Finder</h1>
-  <p>Log jo search kar rahe hain – par bol nahi rahe</p>
 
-  <input id="keyword" placeholder="Keyword likho (YouTube, AI, Jobs)">
-  <button onclick="findDemand()">Find Silent Demand</button>
+<h1>🔍 Silent Demand Finder</h1>
+<p>Log jo search kar rahe hain — par openly bol nahi rahe</p>
 
-  <div id="results"></div>
+<input id="keyword" placeholder="Example: YouTube, AI, Jobs, Kids">
+<button onclick="findDemand()">Find Real Demand</button>
+
+<div id="results"></div>
+
+<div class="footer">
+Free Version • Premium coming soon
 </div>
 
-<script src="js/main.js"></script>
-<script src="js/monetization.js"></script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
