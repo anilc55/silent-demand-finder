@@ -1,49 +1,84 @@
 function findDemand() {
   const keyword = document.getElementById("keyword").value.trim();
-  const resultsDiv = document.getElementById("results");
-  resultsDiv.innerHTML = "";
+  const results = document.getElementById("results");
 
-  if (keyword === "") {
-    resultsDiv.innerHTML = "<p>❌ Keyword likho</p>";
+  results.innerHTML = "";
+
+  if (!keyword) {
+    results.innerHTML = "<div class='result'>❌ Pehle keyword likho</div>";
     return;
   }
 
-  const modifiers = [
-    "for beginners",
-    "without investment",
-    "in Hindi",
-    "free tools",
-    "for students",
-    "for teachers",
-    "low competition",
-    "AI based",
-    "2026",
-    "step by step"
+  // BASIC SILENT DEMAND LOGIC (FREE)
+  const ideas = [
+    {
+      tag: "WHY",
+      text: `${keyword} log search kar rahe hain par openly discuss nahi karte`
+    },
+    {
+      tag: "HOW",
+      text: `${keyword} beginners ke liye simple kaise kare`
+    },
+    {
+      tag: "PROBLEM",
+      text: `${keyword} se related hidden problem jo Google par search hoti hai`
+    },
+    {
+      tag: "COMPARE",
+      text: `${keyword} vs alternative – kaunsa better hai`
+    },
+    {
+      tag: "MISTAKE",
+      text: `${keyword} me beginners ki common galtiyan`
+    }
   ];
 
-  modifiers.forEach(mod => {
-    const demandType = getDemandType(mod);
-    const platform = suggestPlatform(mod);
-
+  ideas.forEach(item => {
     const div = document.createElement("div");
     div.className = "result";
-    div.innerHTML = `
-      <strong>${keyword} ${mod}</strong><br>
-      <span class="tag">Demand: ${demandType}</span><br>
-      <span class="tag">Best Platform: ${platform}</span>
-    `;
-    resultsDiv.appendChild(div);
+    div.innerHTML = `<span class="tag">${item.tag}</span><br>${item.text}`;
+    results.appendChild(div);
   });
 }
 
-function getDemandType(mod) {
-  if (mod.includes("2026") || mod.includes("AI")) return "🔥 Rising";
-  if (mod.includes("free") || mod.includes("Hindi")) return "🟡 Silent";
-  return "🟢 Stable";
+/* -------------------------
+   MONETIZATION SYSTEM
+-------------------------- */
+
+function showPremium() {
+  alert(
+    "🚀 Premium Version Coming Soon!\n\n" +
+    "✔ Real Google Trends\n" +
+    "✔ Competition Score\n" +
+    "✔ Viral Content Angle\n" +
+    "✔ Export Report\n\n" +
+    "Payment: ₹299/month (Planned)"
+  );
 }
 
-function suggestPlatform(mod) {
-  if (mod.includes("students") || mod.includes("teachers")) return "YouTube + App";
-  if (mod.includes("tools") || mod.includes("AI")) return "Website / SaaS";
-  return "YouTube / Blog";
+/* -------------------------
+   API READY STRUCTURE
+-------------------------- */
+
+/*
+FUTURE API LOGIC (example):
+
+async function fetchRealDemand(keyword) {
+  const response = await fetch("https://api.yourservice.com/demand", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ keyword })
+  });
+
+  const data = await response.json();
+  return data;
 }
+
+NOTE:
+- API KEY server-side pe rakho
+- GitHub Pages = frontend only
+- Real API ke liye backend (Node / Cloudflare / Replit) lagega
+*/
