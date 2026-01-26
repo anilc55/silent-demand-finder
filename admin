@@ -1,1 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Login</title>
+</head>
+<body>
+<h2>Admin Login</h2>
 
+<input id="pass" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<script>
+function login(){
+  if(document.getElementById("pass").value==="admin123"){
+    window.location="index.html";
+  }else{
+    alert("Wrong password");
+  }
+}
+</script>
+</body>
+</html>
