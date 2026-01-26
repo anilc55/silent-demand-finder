@@ -1,99 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
   <title>Silent Demand Finder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO -->
-  <meta name="description" content="Hidden demand discover karo – trend se pehle content ideas pao">
-  <meta name="keywords" content="silent demand finder, content ideas, ai demand tool">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background:#0f172a;
-      color:#e5e7eb;
-      padding:20px;
-      max-width:700px;
-      margin:auto;
-    }
-    h1 { color:#22c55e; text-align:center; }
-    p { text-align:center; color:#cbd5f5; }
-
-    input, button {
-      width:100%;
-      padding:14px;
-      margin-top:12px;
-      border-radius:8px;
-      border:none;
-      font-size:16px;
-    }
-    input { background:#020617; color:#fff; border:1px solid #334155; }
-    button {
-      background:#22c55e;
-      color:#000;
-      font-weight:bold;
-      cursor:pointer;
-    }
-    button:hover { background:#16a34a; }
-
-    .result {
-      background:#020617;
-      padding:14px;
-      margin-top:12px;
-      border-radius:8px;
-      border-left:4px solid #22c55e;
-    }
-    .tag {
-      font-size:12px;
-      color:#22c55e;
-      font-weight:bold;
-    }
-
-    .premium {
-      margin-top:20px;
-      padding:16px;
-      border-radius:10px;
-      background:#020617;
-      border:1px dashed #22c55e;
-      text-align:center;
-    }
-    .premium button {
-      background:#facc15;
-      margin-top:10px;
-    }
-
-    footer {
-      margin-top:40px;
-      text-align:center;
-      font-size:13px;
-      color:#64748b;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h1>🔍 Silent Demand Finder</h1>
-<p>Log jo search kar rahe hain – par bol nahi rahe</p>
+<div class="container">
+  <h1>🔍 Silent Demand Finder</h1>
+  <p>Log jo search kar rahe hain – par bol nahi rahe</p>
 
-<input id="keyword" placeholder="Keyword likho (ex: AI, jobs, kids)">
-<button onclick="findDemand()">Find Silent Demand</button>
+  <input id="keyword" placeholder="Keyword likho (YouTube, AI, Jobs)">
+  <button onclick="findDemand()">Find Silent Demand</button>
 
-<div id="results"></div>
-
-<!-- MONETIZATION BLOCK -->
-<div class="premium">
-  <h3>🚀 Premium Demand Report</h3>
-  <p>Real data + competition score + viral angle</p>
-  <button onclick="showPremium()">Unlock Premium</button>
+  <div id="results"></div>
 </div>
 
-<footer>
-  © 2026 Silent Demand Finder | Built with ❤️
-</footer>
-
-<script src="script.js"></script>
+<script src="js/main.js"></script>
+<script src="js/monetization.js"></script>
 </body>
 </html>
