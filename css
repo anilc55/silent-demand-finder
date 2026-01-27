@@ -9,6 +9,67 @@ body{
   max-width:500px;
   margin:auto;
 }
+/* ===== TOP MENU ===== */
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #020617;
+  padding: 14px 18px;
+  border-bottom: 1px solid #022c22;
+}
+
+.logo {
+  color: #22c55e;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.logo span {
+  margin-left: 6px;
+}
+
+.top-nav nav a {
+  color: #e5e7eb;
+  text-decoration: none;
+  margin: 0 12px;
+  font-size: 14px;
+}
+
+.top-nav nav a:hover {
+  color: #22c55e;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 22px;
+  color: #22c55e;
+  cursor: pointer;
+}
+
+/* ===== MOBILE MENU ===== */
+@media (max-width: 768px) {
+  #menu {
+    display: none;
+    position: absolute;
+    top: 58px;
+    left: 0;
+    width: 100%;
+    background: #020617;
+    flex-direction: column;
+    padding: 12px 0;
+  }
+
+  #menu a {
+    padding: 10px;
+    text-align: center;
+    display: block;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
 h1{
   color:#22c55e;
   text-align:center;
