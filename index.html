@@ -2,65 +2,272 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Silent Demand Finder</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --green:#22c55e;
+      --cyan:#22d3ee;
+      --dark:#020617;
+      --glass:rgba(255,255,255,0.06);
+      --border:rgba(34,197,94,0.4);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:radial-gradient(circle at top, #020617, #000);
+      color:#e5e7eb;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* NAVBAR */
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 8%;
+      background:rgba(2,6,23,0.7);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,255,255,0.05);
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:20px;
+      font-weight:600;
+      color:var(--green);
+    }
+
+    nav a{
+      margin:0 14px;
+      color:#cbd5f5;
+      text-decoration:none;
+      font-size:14px;
+    }
+
+    nav a:hover{ color:var(--green); }
+
+    .login-btn{
+      padding:8px 18px;
+      background:linear-gradient(90deg,var(--green),var(--cyan));
+      color:#000;
+      border-radius:8px;
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    /* HERO */
+    .hero{
+      text-align:center;
+      padding:80px 10% 50px;
+    }
+
+    .hero h1{
+      font-size:36px;
+      line-height:1.4;
+      color:#d1fae5;
+      margin-bottom:15px;
+    }
+
+    .hero p{
+      max-width:700px;
+      margin:auto;
+      font-size:15px;
+      color:#9ca3af;
+    }
+
+    .search-box{
+      margin:40px auto 30px;
+      max-width:650px;
+      display:flex;
+      background:var(--glass);
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 0 40px rgba(34,197,94,0.15);
+    }
+
+    .search-box input{
+      flex:1;
+      padding:18px;
+      background:transparent;
+      border:none;
+      color:#fff;
+      font-size:16px;
+      outline:none;
+    }
+
+    .search-box button{
+      padding:0 28px;
+      background:linear-gradient(90deg,var(--green),var(--cyan));
+      border:none;
+      color:#000;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    /* STATS */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+      padding:20px 8%;
+    }
+
+    .card{
+      background:var(--glass);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:18px;
+      box-shadow:0 0 25px rgba(34,197,94,0.1);
+    }
+
+    .card h3{
+      color:var(--green);
+      font-size:15px;
+      margin-bottom:6px;
+    }
+
+    .card p{
+      font-size:13px;
+      color:#cbd5f5;
+    }
+
+    /* FINDINGS */
+    .section-title{
+      text-align:center;
+      margin:60px 0 25px;
+      font-size:26px;
+      color:#bbf7d0;
+    }
+
+    .findings{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:22px;
+      padding:0 8% 80px;
+    }
+
+    .find-card{
+      background:linear-gradient(180deg,rgba(2,6,23,0.9),rgba(2,6,23,0.6));
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:22px;
+      box-shadow:0 0 35px rgba(34,197,94,0.12);
+    }
+
+    .find-card h4{
+      color:var(--green);
+      margin-bottom:10px;
+      letter-spacing:1px;
+    }
+
+    .find-card p{
+      font-size:14px;
+      color:#d1d5db;
+      line-height:1.6;
+    }
+
+    footer{
+      text-align:center;
+      padding:20px;
+      font-size:13px;
+      color:#6b7280;
+      border-top:1px solid rgba(255,255,255,0.05);
+    }
+
+    @media(max-width:600px){
+      .hero h1{ font-size:26px; }
+    }
+  </style>
+</head>
 <body>
 
-<header class="top-nav">
+<header>
   <div class="logo">🔍 Silent Demand Finder</div>
-
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-  <nav id="menu">
+  <nav>
     <a href="#">Home</a>
     <a href="#">Dashboard</a>
-    <a href="#">Admin</a>
-    <a href="#">Monetize</a>
-    <a href="#">Contact</a>
+    <a href="#">Premium</a>
+    <a href="#">Login</a>
+    <a href="#" class="login-btn">Login</a>
   </nav>
 </header>
 
 <section class="hero">
-  <h1>Log jo search kar rahe hain</h1>
-  <p>par openly bol nahi rahe</p>
+  <h1>Log jo search kar rahe hain —<br>par openly bol nahi rahe</h1>
+  <p>Discover hidden demand jise monetize kiya ja sakta hai — kam competition ke saath.</p>
+
+  <div class="search-box">
+    <input type="text" placeholder="Enter a keyword (AI, Jobs, YouTube…)">
+    <button>Find Silent Demand</button>
+  </div>
 </section>
 
-<section class="search-box">
-  <input id="keyword" placeholder="Example: AI, YouTube, Jobs, Kids">
-  <button onclick="findDemand()">Find Real Demand</button>
-</section>
-
-<section id="results">
-
+<section class="stats">
   <div class="card">
     <h3>Demand Type</h3>
-    <p id="demandType">Hidden / Silent Search</p>
+    <p>Hidden + Silent Search</p>
   </div>
-
   <div class="card">
     <h3>Intent Level</h3>
-    <p id="intentLevel">High – Monetizable</p>
+    <p>High + Monetizable</p>
   </div>
-
   <div class="card">
     <h3>Competition</h3>
-    <p id="competition">Low to Medium</p>
+    <p>Low to Medium</p>
   </div>
-
   <div class="card">
     <h3>Status</h3>
-    <p id="status">Real-time Logic</p>
+    <p>AI + Real-time Logic</p>
   </div>
+</section>
 
+<h2 class="section-title">Silent Demand Findings</h2>
+
+<section class="findings">
+  <div class="find-card">
+    <h4>WHY</h4>
+    <p>Log is topic ko search karte hain par openly discuss nahi karte.</p>
+  </div>
+  <div class="find-card">
+    <h4>HOW</h4>
+    <p>Beginners ke liye step-by-step kaise shuru kare.</p>
+  </div>
+  <div class="find-card">
+    <h4>PROBLEM</h4>
+    <p>Real problems jo log Google par chup-chaap search karte hain.</p>
+  </div>
+  <div class="find-card">
+    <h4>COMPARE</h4>
+    <p>Alternatives ke comparison — kaunsa better aur sasta hai.</p>
+  </div>
+  <div class="find-card">
+    <h4>MISTAKE</h4>
+    <p>Common galtiyan jo paisa aur waqt barbaad karti hain.</p>
+  </div>
+  <div class="find-card">
+    <h4>SECRET</h4>
+    <p>Hidden tricks jo professionals openly nahi batate.</p>
+  </div>
 </section>
 
 <footer>
-  © 2026 Silent Demand Finder • Powered by AI Logic
+  © 2026 Silent Demand Finder • Free Tool • Premium Unlock Coming Soon
 </footer>
 
-<script src="script.js"></script>
 </body>
 </html>
