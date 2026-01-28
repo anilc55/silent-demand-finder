@@ -1,0 +1,23 @@
+// Core server structure
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+
+const app = express();
+
+// Rate limiting
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP
+});
+
+app.use('/api/', apiLimiter);
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+
+// Database models
+const User = require('./models/User');
+const SearchResult = require('./models/SearchResult');
+const Subscription = require('./models/Subscription');
