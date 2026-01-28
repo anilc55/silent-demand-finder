@@ -1,0 +1,62 @@
+{
+  "queries": [
+    {
+      "id": 1,
+      "query": "sustainable packaging alternatives",
+      "category": "environment",
+      "findings": [
+        "Biodegradable mushroom packaging gaining traction",
+        "Edible food containers emerging in food industry",
+        "Seaweed-based packaging solutions being developed"
+      ],
+      "date": "2024-01-15",
+      "sentiment": "positive",
+      "confidence_score": 0.85
+    },
+    {
+      "id": 2,
+      "query": "remote work productivity tools",
+      "category": "technology",
+      "findings": [
+        "AI-powered focus assistants in demand",
+        "Virtual coworking spaces trending",
+        "Time-blocking apps with AI integration requested"
+      ],
+      "date": "2024-01-14",
+      "sentiment": "positive",
+      "confidence_score": 0.78
+    },
+    {
+      "id": 3,
+      "query": "personalized learning platforms",
+      "category": "education",
+      "findings": [
+        "Adaptive learning algorithms requested",
+        "Micro-learning content preferences increasing",
+        "Gamified skill development platforms needed"
+      ],
+      "date": "2024-01-13",
+      "sentiment": "positive",
+      "confidence_score": 0.92
+    },
+    {
+      "id": 4,
+      "query": "mental wellness at workplace",
+      "category": "health",
+      "findings": [
+        "Silent demand for anonymous mental health support",
+        "Meditation rooms in offices becoming expected",
+        "Digital detox zones requested but not vocalized"
+      ],
+      "date": "2024-01-12",
+      "sentiment": "positive",
+      "confidence_score": 0.88
+    }
+  ],
+  "metadata": {
+    "total_queries": 4,
+    "last_updated": "2024-01-15T10:30:00Z",
+    "version": "1.0.0",
+    "data_source": "aggregated_user_behavior"
+  }
+}
