@@ -1,0 +1,110 @@
+apps/frontend/
+├── 📁 public/
+│   ├── 📁 locales/                  # i18n translation files
+│   │   ├── en/
+│   │   ├── hi/
+│   │   ├── es/
+│   │   └── ...
+│   ├── 📁 images/
+│   ├── 📁 fonts/
+│   └── robots.txt
+│
+├── 📁 src/
+│   ├── 📁 app/                      # App Router (Next.js 15)
+│   │   ├── 📁 (auth)/               # Auth group
+│   │   │   ├── login/
+│   │   │   ├── register/
+│   │   │   └── forgot-password/
+│   │   ├── 📁 dashboard/            # Protected routes
+│   │   │   ├── page.tsx
+│   │   │   ├── 📁 demand-finder/
+│   │   │   ├── 📁 content-generator/
+│   │   │   ├── 📁 products/
+│   │   │   └── 📁 analytics/
+│   │   ├── 📁 pricing/
+│   │   ├── 📁 api/                  # Frontend API routes
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   └── globals.css
+│   │
+│   ├── 📁 components/               # React Components
+│   │   ├── 📁 dashboard/
+│   │   │   ├── DashboardLayout.tsx
+│   │   │   ├── Sidebar.tsx
+│   │   │   ├── Header.tsx
+│   │   │   ├── DemandCard.tsx
+│   │   │   ├── FiltersPanel.tsx
+│   │   │   ├── CountryHeatmap.tsx
+│   │   │   ├── ScoreVisualization.tsx
+│   │   │   └── StatCard.tsx
+│   │   ├── 📁 demand/
+│   │   │   ├── DemandGrid.tsx
+│   │   │   ├── DemandFilters.tsx
+│   │   │   ├── PlatformBadge.tsx
+│   │   │   └── MetricItem.tsx
+│   │   ├── 📁 content/
+│   │   │   ├── ContentGenerator.tsx
+│   │   │   ├── VideoTopicCard.tsx
+│   │   │   ├── BlogOutline.tsx
+│   │   │   └── ThumbnailIdeas.tsx
+│   │   ├── 📁 ui/
+│   │   │   ├── Button.tsx
+│   │   │   ├── Card.tsx
+│   │   │   ├── Modal.tsx
+│   │   │   ├── Table.tsx
+│   │   │   └── LoadingSpinner.tsx
+│   │   └── 📁 pricing/
+│   │       ├── PricingCard.tsx
+│   │       └── PlanComparison.tsx
+│   │
+│   ├── 📁 hooks/                    # Custom React Hooks
+│   │   ├── useDemandData.ts
+│   │   ├── useContentGenerator.ts
+│   │   ├── useAuth.ts
+│   │   ├── useFilters.ts
+│   │   └── useAnalytics.ts
+│   │
+│   ├── 📁 lib/                      # Frontend libraries
+│   │   ├── 📁 api/
+│   │   │   ├── client.ts
+│   │   │   ├── demand.ts
+│   │   │   ├── content.ts
+│   │   │   └── auth.ts
+│   │   ├── 📁 utils/
+│   │   │   ├── formatters.ts
+│   │   │   ├── validators.ts
+│   │   │   ├── scoring.ts
+│   │   │   └── constants.ts
+│   │   ├── 📁 i18n/
+│   │   │   ├── config.ts
+│   │   │   ├── translations/
+│   │   │   └── hooks.ts
+│   │   └── 📁 providers/
+│   │       ├── AuthProvider.tsx
+│   │       ├── ThemeProvider.tsx
+│   │       └── QueryProvider.tsx
+│   │
+│   ├── 📁 stores/                   # State management (Zustand)
+│   │   ├── demandStore.ts
+│   │   ├── userStore.ts
+│   │   ├── filterStore.ts
+│   │   └── uiStore.ts
+│   │
+│   ├── 📁 types/                    # TypeScript types
+│   │   ├── demand.ts
+│   │   ├── user.ts
+│   │   ├── content.ts
+│   │   ├── api.ts
+│   │   └── index.ts
+│   │
+│   └── 📁 styles/                   # Tailwind & custom styles
+│       ├── globals.css
+│       ├── tailwind.config.js
+│       └── theme.ts
+│
+├── package.json
+├── tsconfig.json
+├── next.config.js
+├── tailwind.config.js
+├── postcss.config.js
+└── .env.local
