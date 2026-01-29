@@ -1,0 +1,17 @@
+silent-demand-finder/
+├── 📁 apps/
+│   ├── 📁 frontend/                 # Next.js 15 Frontend
+│   ├── 📁 backend/                  # Node.js/Express Backend
+│   ├── 📁 ai-service/               # Python AI Microservice
+│   └── 📁 admin-panel/              # Admin Dashboard
+│
+├── 📁 packages/                     # Shared packages
+│   ├── 📁 shared-types/             # TypeScript shared types
+│   ├── 📁 ui-components/            # Reusable UI components
+│   ├── 📁 utils/                    # Shared utilities
+│   └── 📁 config/                   # Shared configurations
+│
+├── 📁 infrastructure/               # DevOps & Infrastructure
+├── 📁 docs/                         # Documentation
+├── 📁 scripts/                      # Build/deployment scripts
+└── 📁 tests/                        # Test suites
