@@ -1,0 +1,17 @@
+silent-demand-finder/
+├── package.json                     # Root package.json (monorepo)
+├── turbo.json                       # Turborepo config
+├── pnpm-workspace.yaml              # PNPM workspace
+├── .gitignore
+├── .env.example
+├── .env.development
+├── .env.production
+├── .prettierrc
+├── .eslintrc.js
+├── .dockerignore
+├── docker-compose.yml
+├── docker-compose.override.yml
+├── Makefile                         # Common commands
+├── README.md
+├── LICENSE
+└── CONTRIBUTING.md
