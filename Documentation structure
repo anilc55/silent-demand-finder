@@ -1,0 +1,28 @@
+docs/
+├── 📁 api/                          # API documentation
+│   ├── v1/
+│   │   ├── auth.md
+│   │   ├── demand.md
+│   │   ├── content.md
+│   │   └── webhooks.md
+│   └── postman_collection.json
+│
+├── 📁 architecture/                 # Architecture docs
+│   ├── system-design.md
+│   ├── data-flow.md
+│   ├── api-design.md
+│   └── database-design.md
+│
+├── 📁 development/                  # Dev docs
+│   ├── setup.md
+│   ├── coding-standards.md
+│   ├── testing.md
+│   └── deployment.md
+│
+├── 📁 user-guides/                  # User documentation
+│   ├── getting-started.md
+│   ├── demand-finder.md
+│   ├── content-generator.md
+│   └── faq.md
+│
+└── README.md
