@@ -1,0 +1,27 @@
+apps/admin-panel/
+├── 📁 src/
+│   ├── 📁 app/
+│   │   ├── 📁 dashboard/
+│   │   ├── 📁 users/
+│   │   ├── 📁 analytics/
+│   │   ├── 📁 settings/
+│   │   └── layout.tsx
+│   │
+│   ├── 📁 components/
+│   │   ├── 📁 admin/
+│   │   │   ├── AdminSidebar.tsx
+│   │   │   ├── AdminCard.tsx
+│   │   │   ├── UserTable.tsx
+│   │   │   ├── RevenueChart.tsx
+│   │   │   ├── ApiUsageChart.tsx
+│   │   │   └── FeatureToggle.tsx
+│   │   └── 📁 shared/
+│   │
+│   ├── 📁 lib/
+│   │   ├── admin-api.ts
+│   │   └── utils.ts
+│   │
+│   └── 📁 types/
+│       └── admin.ts
+│
+└── package.json
