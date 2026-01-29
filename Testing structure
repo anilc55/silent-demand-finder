@@ -1,0 +1,28 @@
+tests/
+├── 📁 unit/                         # Unit tests
+│   ├── frontend/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   └── utils/
+│   ├── backend/
+│   │   ├── services/
+│   │   ├── controllers/
+│   │   └── middleware/
+│   └── ai-service/
+│       ├── analyzers/
+│       └── collectors/
+│
+├── 📁 integration/                  # Integration tests
+│   ├── api/
+│   ├── database/
+│   └── third-party/
+│
+├── 📁 e2e/                          # End-to-end tests
+│   ├── auth.cy.ts
+│   ├── demand.cy.ts
+│   ├── content.cy.ts
+│   └── payment.cy.ts
+│
+└── 📁 performance/                  # Performance tests
+    ├── load-testing/
+    └── stress-testing/
