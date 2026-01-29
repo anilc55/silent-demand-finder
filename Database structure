@@ -1,0 +1,23 @@
+database/
+├── 📁 migrations/                   # Database migrations
+│   ├── 001_initial_schema.sql
+│   ├── 002_add_demand_scoring.sql
+│   ├── 003_add_content_tables.sql
+│   ├── 004_add_subscriptions.sql
+│   └── 005_add_analytics.sql
+│
+├── 📁 seeds/                        # Seed data
+│   ├── countries.sql
+│   ├── languages.sql
+│   ├── platforms.sql
+│   └── test_data.sql
+│
+├── 📁 schemas/                      # Database schemas
+│   ├── users.sql
+│   ├── demand.sql
+│   ├── content.sql
+│   ├── payments.sql
+│   └── analytics.sql
+│
+└── 📁 backups/                      # Backup scripts
+    └── backup_procedure.sql
