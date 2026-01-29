@@ -1,0 +1,40 @@
+packages/
+├── 📁 shared-types/                 # Shared TypeScript types
+│   ├── package.json
+│   ├── 📁 src/
+│   │   ├── demand.types.ts
+│   │   ├── user.types.ts
+│   │   ├── content.types.ts
+│   │   ├── api.types.ts
+│   │   └── index.ts
+│   └── tsconfig.json
+│
+├── 📁 ui-components/                # Shared UI components
+│   ├── package.json
+│   ├── 📁 src/
+│   │   ├── 📁 buttons/
+│   │   ├── 📁 cards/
+│   │   ├── 📁 forms/
+│   │   ├── 📁 modals/
+│   │   └── index.ts
+│   └── tailwind.config.js
+│
+├── 📁 utils/                        # Shared utilities
+│   ├── package.json
+│   ├── 📁 src/
+│   │   ├── dateFormatters.ts
+│   │   ├── numberFormatters.ts
+│   │   ├── currencyFormatter.ts
+│   │   ├── validators.ts
+│   │   └── index.ts
+│   └── tsconfig.json
+│
+└── 📁 config/                       # Shared configs
+    ├── package.json
+    ├── 📁 src/
+    │   ├── constants.ts
+    │   ├── countries.ts
+    │   ├── languages.ts
+    │   ├── currencies.ts
+    │   └── index.ts
+    └── tsconfig.json
