@@ -1,0 +1,97 @@
+apps/backend/
+├── 📁 src/
+│   ├── 📁 config/                   # Configuration
+│   │   ├── database.ts
+│   │   ├── env.ts
+│   │   ├── constants.ts
+│   │   ├── rateLimiter.ts
+│   │   └── cors.ts
+│   │
+│   ├── 📁 middleware/               # Express middleware
+│   │   ├── auth.middleware.ts
+│   │   ├── validation.middleware.ts
+│   │   ├── error.middleware.ts
+│   │   ├── rateLimit.middleware.ts
+│   │   └── logging.middleware.ts
+│   │
+│   ├── 📁 routes/                   # API Routes
+│   │   ├── 📁 v1/                   # API Version 1
+│   │   │   ├── auth.routes.ts
+│   │   │   ├── demand.routes.ts
+│   │   │   ├── content.routes.ts
+│   │   │   ├── user.routes.ts
+│   │   │   ├── subscription.routes.ts
+│   │   │   ├── webhook.routes.ts
+│   │   │   └── admin.routes.ts
+│   │   └── index.ts
+│   │
+│   ├── 📁 controllers/              # Route controllers
+│   │   ├── auth.controller.ts
+│   │   ├── demand.controller.ts
+│   │   ├── content.controller.ts
+│   │   ├── user.controller.ts
+│   │   ├── subscription.controller.ts
+│   │   └── admin.controller.ts
+│   │
+│   ├── 📁 services/                 # Business logic
+│   │   ├── 📁 demand/
+│   │   │   ├── DemandService.ts
+│   │   │   ├── DataCollectorService.ts
+│   │   │   └── ScoringService.ts
+│   │   ├── 📁 content/
+│   │   │   ├── ContentService.ts
+│   │   │   └── GeneratorService.ts
+│   │   ├── 📁 user/
+│   │   │   ├── UserService.ts
+│   │   │   └── AuthService.ts
+│   │   ├── 📁 payment/
+│   │   │   ├── StripeService.ts
+│   │   │   ├── RazorpayService.ts
+│   │   │   └── SubscriptionService.ts
+│   │   ├── 📁 email/
+│   │   │   ├── EmailService.ts
+│   │   │   └── templates/
+│   │   └── 📁 analytics/
+│   │       ├── AnalyticsService.ts
+│   │       └── TrackingService.ts
+│   │
+│   ├── 📁 models/                   # Database models
+│   │   ├── User.model.ts
+│   │   ├── SearchResult.model.ts
+│   │   ├── Content.model.ts
+│   │   ├── Subscription.model.ts
+│   │   ├── Payment.model.ts
+│   │   ├── APILog.model.ts
+│   │   └── index.ts
+│   │
+│   ├── 📁 utils/                    # Utilities
+│   │   ├── logger.ts
+│   │   ├── validators.ts
+│   │   ├── formatters.ts
+│   │   ├── apiResponse.ts
+│   │   ├── security.ts
+│   │   └── helpers.ts
+│   │
+│   ├── 📁 database/                 # Database config & migrations
+│   │   ├── migrations/
+│   │   ├── seeds/
+│   │   ├── connection.ts
+│   │   └── schema.sql
+│   │
+│   ├── 📁 queues/                   # Job queues (Bull)
+│   │   ├── demandQueue.ts
+│   │   ├── emailQueue.ts
+│   │   ├── webhookQueue.ts
+│   │   └── workers/
+│   │
+│   ├── 📁 types/                    # TypeScript types
+│   │   ├── express/
+│   │   └── index.ts
+│   │
+│   └── app.ts                       # Express app
+│
+├── package.json
+├── tsconfig.json
+├── dockerfile
+├── .env
+└── ecosystem.config.js              # PM2 config
