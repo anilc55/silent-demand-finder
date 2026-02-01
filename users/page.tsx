@@ -1,3 +1,5 @@
+import AdminSidebar from "../../components/admin/AdminSidebar";
+
 export default function Users() {
   const users = [
     { id: 1, name: "Rahul", email: "rahul@test.com" },
@@ -6,32 +8,35 @@ export default function Users() {
   ];
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Users Management</h1>
+    <div style={{ display: "flex" }}>
+      <AdminSidebar />
+      <div style={{ padding: "20px", flex: 1 }}>
+        <h1>Users Management</h1>
 
-      <table
-        border={1}
-        cellPadding={10}
-        style={{ marginTop: "20px", width: "100%" }}
-      >
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
+        <table
+          border={1}
+          cellPadding={10}
+          style={{ marginTop: "20px", width: "100%" }}
+        >
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id}>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
