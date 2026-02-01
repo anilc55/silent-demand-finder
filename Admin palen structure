@@ -1,27 +1,20 @@
-apps/admin-panel/
-├── 📁 src/
-│   ├── 📁 app/
-│   │   ├── 📁 dashboard/
-│   │   ├── 📁 users/
-│   │   ├── 📁 analytics/
-│   │   ├── 📁 settings/
-│   │   └── layout.tsx
-│   │
-│   ├── 📁 components/
-│   │   ├── 📁 admin/
-│   │   │   ├── AdminSidebar.tsx
-│   │   │   ├── AdminCard.tsx
-│   │   │   ├── UserTable.tsx
-│   │   │   ├── RevenueChart.tsx
-│   │   │   ├── ApiUsageChart.tsx
-│   │   │   └── FeatureToggle.tsx
-│   │   └── 📁 shared/
-│   │
-│   ├── 📁 lib/
-│   │   ├── admin-api.ts
-│   │   └── utils.ts
-│   │
-│   └── 📁 types/
-│       └── admin.ts
-│
-└── package.json
+export const metadata = {
+  title: "Silent Demand Finder | Admin Panel",
+  description: "Admin Dashboard by Anil Chauhan",
+};
+
+export default function RootLayout({ children }: any) {
+  return (
+    <html lang="en">
+      <body
+        style={{
+          margin: 0,
+          fontFamily: "Arial, sans-serif",
+          background: "#f5f5f5",
+        }}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
