@@ -1,23 +1,14 @@
-database/
-├── 📁 migrations/                   # Database migrations
-│   ├── 001_initial_schema.sql
-│   ├── 002_add_demand_scoring.sql
-│   ├── 003_add_content_tables.sql
-│   ├── 004_add_subscriptions.sql
-│   └── 005_add_analytics.sql
-│
-├── 📁 seeds/                        # Seed data
-│   ├── countries.sql
-│   ├── languages.sql
-│   ├── platforms.sql
-│   └── test_data.sql
-│
-├── 📁 schemas/                      # Database schemas
-│   ├── users.sql
-│   ├── demand.sql
-│   ├── content.sql
-│   ├── payments.sql
-│   └── analytics.sql
-│
-└── 📁 backups/                      # Backup scripts
-    └── backup_procedure.sql
+export default function Dashboard() {
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>Admin Dashboard</h1>
+      <p>Welcome, Anil Chauhan</p>
+
+      <div style={{ marginTop: "20px" }}>
+        <div>Total Users: 120</div>
+        <div>Active Projects: 5</div>
+        <div>Monthly Revenue: ₹25,000</div>
+      </div>
+    </div>
+  );
+}
