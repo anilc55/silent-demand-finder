@@ -1,13 +1,12 @@
+import AdminSidebar from "../../components/admin/AdminSidebar";
+
 export default function Dashboard() {
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Admin Dashboard</h1>
-      <p>Welcome, Anil Chauhan</p>
-
-      <div style={{ marginTop: "20px" }}>
-        <div>Total Users: 120</div>
-        <div>Active Projects: 5</div>
-        <div>Monthly Revenue: ₹25,000</div>
+    <div style={{ display: "flex" }}>
+      <AdminSidebar />
+      <div style={{ padding: "20px", flex: 1 }}>
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, Anil Chauhan</p>
       </div>
     </div>
   );
