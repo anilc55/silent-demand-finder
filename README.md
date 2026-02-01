@@ -31,3 +31,64 @@ Silent Demand Finder एक AI-powered प्लेटफॉर्म है ज
 ---
 
 ## 📂 Project Structure
+---
+
+## ⚙️ Technology Stack
+
+- Frontend: React / Next.js
+- Backend: Node.js / Express
+- Database: MongoDB / MySQL
+- AI: Python / ML Models
+- Hosting: GitHub Pages / Cloud
+
+---
+
+## 💼 Use Cases
+
+✔️ YouTubers  
+✔️ Bloggers  
+✔️ Digital Marketers  
+✔️ SEO Experts  
+✔️ Online Business Owners  
+✔️ Affiliate Marketers  
+
+---
+
+## 💰 Monetization Plan
+
+This project supports multiple income models:
+
+💵 Subscription System  
+💵 Premium Reports  
+💵 API Access  
+💵 Affiliate Tools  
+💵 Consulting Services  
+
+---
+
+## 🚀 Future Roadmap
+
+- Mobile App Development
+- Advanced AI Prediction
+- Multi-Language Support
+- Auto Content Generator
+- SaaS Platform Launch
+
+---
+
+## 👨‍💻 Developer & Owner
+
+**Name:** Anil Chauhan  
+**Country:** India 🇮🇳  
+**Project:** Silent Demand Finder  
+
+📧 Contact: Coming Soon  
+🌐 Website: Coming Soon  
+
+---
+
+## 📜 License
+
+This project is licensed under MIT License.
+
+© 2026 Anil Chauhan. All Rights Reserved.
