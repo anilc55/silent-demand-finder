@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Demand Finder - Find What People Secretly Search For</title>
+    <meta name="description" content="Discover hidden demand that people search for but don't openly talk about. AI-powered tool to find low-competition monetizable opportunities.">
+    <link rel="icon" href="favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-link:hover {
+            opacity: 0.9;
+        }
+
+        .btn-login {
+            background: white;
+            color: #667eea;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f6f9ff 0%, #e9f2ff 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-search {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-search:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        /* Metrics Section */
+        .metrics {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #1e293b;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-title {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        /* Findings Section */
+        .findings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .finding-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .finding-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .finding-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .finding-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .icon-why { background: #3b82f6; }
+        .icon-how { background: #10b981; }
+        .icon-problem { background: #ef4444; }
+        .icon-compare { background: #8b5cf6; }
+        .icon-mistake { background: #f59e0b; }
+        .icon-secret { background: #ec4899; }
+
+        .finding-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .finding-description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #94a3b8;
+            margin-top: 1rem;
+        }
+
+        /* Dashboard Styles */
+        .dashboard {
+            padding: 2rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Login Styles */
+        .login-container {
+            max-width: 400px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1e293b;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #64748b;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .btn-search {
+                width: 100%;
+            }
+            
+            .metrics-grid,
+            .findings-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Demo Results */
+        .demo-results {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">Silent Demand Finder</a>
+                
+                <div class="nav-links">
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
+                    <a href="#demo" class="nav-link">Demo</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#login" class="nav-link btn-login">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">
+                What people search for – but don't openly talk about
+            </h1>
+            <p class="hero-subtitle">
+                Discover hidden demand that you can monetize with low competition
+            </p>
+            
+            <div class="search-container">
+                <form class="search-box" id="searchForm">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        placeholder="Enter a keyword (AI, Passive Income, YouTube...)" 
+                        id="keywordInput"
+                        value="AI"
+                    >
+                    <button type="submit" class="btn-search">
+                        Find Silent Demand
+                    </button>
+                </form>
+                <p style="color: #64748b; font-size: 0.9rem;">
+                    Try: "Passive Income", "Career Change", "Remote Work", "Stock Market"
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Results Section -->
+    <section class="metrics" id="demo">
+        <div class="container">
+            <h2 class="section-title">Analysis for: <span id="currentKeyword">AI</span></h2>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-title">Demand Type</div>
+                    <div class="metric-value">🔍 Hidden +</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Intent Level</div>
+                    <div class="metric-value">🎯 High + Monetizable</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Competition</div>
+                    <div class="metric-value">📊 Low to Medium</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Status</div>
+                    <div class="metric-value">🤖 AI + Real-time Logic</div>
+                </div>
+            </div>
+
+            <!-- Findings Section -->
+            <h2 class="section-title">Silent Demand Findings</h2>
+            <div class="findings-grid">
+                <div class="finding-card">
+                    <div class="finding-header">
+                        <div class="finding-icon icon-why">W</div>
+                        <h3 class="finding-title">WHY</h3>
+                    </div>
+                    <p class="finding-description">People search for "AI" but don't openly discuss their specific fears, insecurities, or lack of understanding in public forums.</p>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-header">
+                        <div class="finding-icon icon-how">H</div>
+                        <h3 class="finding-title">HOW</h3>
+                    </div>
+                    <p class="finding-description">Step-by-step guide for beginners on how to start with AI without technical background or large investments.</p>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-header">
+                        <div class="finding-icon icon-problem">P</div>
+                        <h3 class="finding-title">PROBLEM</h3>
+                    </div>
+                    <p class="finding-description">Real problems related to AI that people quietly search for solutions: "AI taking my job", "AI anxiety", "Is AI safe?"</p>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-header">
+                        <div class="finding-icon icon-compare">C</div>
+                        <h3 class="finding-title">COMPARE</h3>
+                    </div>
+                    <p class="finding-description">Comparison between AI tools (ChatGPT vs Bard vs Claude) - which is better for specific tasks and cheaper alternatives.</p>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-header">
+                        <div class="finding-icon icon-mistake">M</div>
+                        <h3 class="finding-title">MISTAKE</h3>
+                    </div>
+                    <p class="finding-description">Common mistakes beginners make when learning AI that waste time and money. What not to do based on search patterns.</p>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-header">
+                        <div class="finding-icon icon-secret">S</div>
+                        <h3 class="finding-title">SECRET</h3>
+                    </div>
+                    <p class="finding-description">Hidden AI tricks that professionals use but don't openly share: prompt engineering secrets, automation hacks, etc.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="metrics" id="how-it-works" style="background: #f1f5f9; padding: 4rem 0;">
+        <div class="container">
+            <h2 class="section-title">How Silent Demand Finder Works</h2>
+            
+            <div class="findings-grid">
+                <div class="finding-card">
+                    <div class="finding-header">
+                        <div class="finding-icon" style="background: #667eea;">1</div>
+                        <h3 class="finding-title">AI-Powered Analysis</h3>
+                    </div>
+                    <p class="finding-description">Our AI analyzes search patterns, forum discussions, and social media to find topics people search for but don't discuss publicly.</p>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-header">
+                        <div class="finding-icon" style="background: #10b981;">2</div>
+                        <h3 class="finding-title">Demand Validation</h3>
+                    </div>
+                    <p class="finding-description">We validate demand through multiple data sources to ensure it's real, monetizable, and has low competition.</p>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-header">
+                        <div class="finding-icon" style="background: #8b5cf6;">3</div>
+                        <h3 class="finding-title">Actionable Insights</h3>
+                    </div>
+                    <p class="finding-description">Get specific content ideas, monetization strategies, and step-by-step guides for each finding.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="metrics" id="features">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            
+            <div class="findings-grid">
+                <div class="finding-card">
+                    <h3 class="finding-title">🎯 Real-time Demand Detection</h3>
+                    <p class="finding-description">Track emerging trends and hidden demand in real-time across multiple platforms.</p>
+                </div>
+                <div class="finding-card">
+                    <h3 class="finding-title">📊 Competition Analysis</h3>
+                    <p class="finding-description">See exactly how many creators are targeting each opportunity and find gaps.</p>
+                </div>
+                <div class="finding-card">
+                    <h3 class="finding-title">💰 Monetization Suggestions</h3>
+                    <p class="finding-description">Get tailored monetization ideas: courses, affiliate products, services, or content creation.</p>
+                </div>
+                <div class="finding-card">
+                    <h3 class="finding-title">🚀 Quick Start Templates</h3>
+                    <p class="finding-description">Ready-to-use templates for blog posts, videos, social media content, and email sequences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login/Get Started -->
+    <section id="login">
+        <div class="login-container">
+            <h2 class="login-title">Get Started for Free</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input type="email" class="form-input" id="email" placeholder="you@example.com" required>
+                </div>
+                <button type="submit" class="btn-submit">Start Finding Silent Demand</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; color: #64748b; font-size: 0.9rem;">
+                Free plan includes 5 searches per day. No credit card required.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#privacy" class="footer-link">Privacy Policy</a>
+                    <a href="#terms" class="footer-link">Terms of Service</a>
+                    <a href="#contact" class="footer-link">Contact Us</a>
+                    <a href="#about" class="footer-link">About</a>
+                </div>
+                <div class="copyright">
+                    © 2023 Silent Demand Finder • Free Tool Now • Premium Unlock Coming Soon
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple demo functionality
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const keyword = document.getElementById('keywordInput').value.trim();
+            if (keyword) {
+                document.getElementById('currentKeyword').textC
