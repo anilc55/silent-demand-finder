@@ -17,6 +17,10 @@
                 <a href="#" class="nav-link active">Home</a>
                 <a href="#" class="nav-link">Dashboard</a>
                 <a href="#" class="nav-link">Premium</a>
+                <a href="#" class="nav-link api-link">
+                    <i class="fas fa-key"></i> API 
+                    <span class="api-badge">PRO</span>
+                </a>
                 <div class="nav-buttons">
                     <a href="#" class="btn-login">Login</a>
                     <a href="#" class="btn-login">Sign Up</a>
@@ -137,6 +141,87 @@
         </div>
     </section>
 
+    <!-- Payment Gateway Section -->
+    <section class="payment-section" id="paymentSection">
+        <div class="container">
+            <h2 class="section-title">Premium Subscription Plans</h2>
+            <p class="section-subtitle">Upgrade to unlock advanced features</p>
+            
+            <div class="payment-grid">
+                <div class="payment-card">
+                    <div class="plan-badge basic">BASIC</div>
+                    <h3>Free Plan</h3>
+                    <div class="price">₹0<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 5 searches per day</li>
+                        <li><i class="fas fa-check"></i> Basic analysis</li>
+                        <li><i class="fas fa-times"></i> No API access</li>
+                        <li><i class="fas fa-times"></i> Limited data</li>
+                    </ul>
+                    <button class="btn-payment current-plan" disabled>Current Plan</button>
+                </div>
+                
+                <div class="payment-card popular">
+                    <div class="plan-badge pro">POPULAR</div>
+                    <h3>Pro Plan</h3>
+                    <div class="price">₹499<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Unlimited searches</li>
+                        <li><i class="fas fa-check"></i> Advanced analysis</li>
+                        <li><i class="fas fa-check"></i> Basic API access</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                    </ul>
+                    <button class="btn-payment" onclick="processPayment('pro')">
+                        <i class="fas fa-bolt"></i> Upgrade Now
+                    </button>
+                    <div class="payment-options">
+                        <button class="payment-option" onclick="selectGateway('razorpay')">
+                            <i class="fas fa-credit-card"></i> Razorpay
+                        </button>
+                        <button class="payment-option" onclick="selectGateway('paypal')">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </button>
+                        <button class="payment-option" onclick="selectGateway('stripe')">
+                            <i class="fas fa-university"></i> Stripe
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="payment-card">
+                    <div class="plan-badge enterprise">ENTERPRISE</div>
+                    <h3>Enterprise</h3>
+                    <div class="price">₹1,999<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Everything in Pro</li>
+                        <li><i class="fas fa-check"></i> Full API access</li>
+                        <li><i class="fas fa-check"></i> White label</li>
+                        <li><i class="fas fa-check"></i> Dedicated support</li>
+                    </ul>
+                    <button class="btn-payment" onclick="processPayment('enterprise')">
+                        <i class="fas fa-crown"></i> Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Access Section -->
+    <section class="admin-section" id="adminSection">
+        <div class="container">
+            <div class="admin-access">
+                <i class="fas fa-lock admin-icon"></i>
+                <h3>Admin Access</h3>
+                <p>Secure admin panel for managing API keys, monetization, and subscriptions</p>
+                <button class="btn-admin" onclick="redirectToAdmin()">
+                    <i class="fas fa-user-shield"></i> Access Admin Panel
+                </button>
+                <p class="admin-note">
+                    <i class="fas fa-shield-alt"></i> Secure access with 2FA enabled
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Features -->
     <section class="features">
         <div class="container">
@@ -182,19 +267,36 @@
                 <p class="footer-tagline">Discover what people search for but don't talk about</p>
                 
                 <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Contact Us</a>
-                    <a href="#">About</a>
+                    <a href="privacy-policy.html" class="footer-link">
+                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                    </a>
+                    <a href="#" class="footer-link">
+                        <i class="fas fa-file-contract"></i> Terms of Service
+                    </a>
+                    <a href="#" class="footer-link">
+                        <i class="fas fa-envelope"></i> Contact Us
+                    </a>
+                    <a href="#" class="footer-link">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                    <a href="#paymentSection" class="footer-link">
+                        <i class="fas fa-credit-card"></i> Payment Gateway
+                    </a>
+                    <a href="#adminSection" class="footer-link">
+                        <i class="fas fa-user-shield"></i> Admin Panel
+                    </a>
                 </div>
                 
-                <div class="footer-cta">
-                    <div class="premium-badge">
-                        <i class="fas fa-crown"></i> Premium Unlock Coming Soon
+                <div class="footer-security">
+                    <div class="security-badge">
+                        <i class="fas fa-lock"></i> SSL Secured
                     </div>
-                    <button class="btn-premium">
-                        <i class="fas fa-rocket"></i> Join Waitlist
-                    </button>
+                    <div class="security-badge">
+                        <i class="fas fa-shield-alt"></i> GDPR Compliant
+                    </div>
+                    <div class="security-badge">
+                        <i class="fas fa-user-lock"></i> Data Encrypted
+                    </div>
                 </div>
                 
                 <div class="copyright">
@@ -210,6 +312,43 @@
             <div class="spinner"></div>
             <h3>Analyzing Silent Demand...</h3>
             <p>Scanning hidden patterns and user behavior</p>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="modal-content">
+            <h3>Complete Your Payment</h3>
+            <div class="payment-form">
+                <input type="text" id="paymentAmount" placeholder="Amount (₹)" readonly>
+                <input type="text" id="paymentPlan" placeholder="Plan" readonly>
+                
+                <div class="gateway-options">
+                    <label class="gateway-option active">
+                        <input type="radio" name="gateway" value="razorpay" checked>
+                        <i class="fas fa-credit-card"></i> Razorpay
+                    </label>
+                    <label class="gateway-option">
+                        <input type="radio" name="gateway" value="paypal">
+                        <i class="fab fa-paypal"></i> PayPal
+                    </label>
+                    <label class="gateway-option">
+                        <input type="radio" name="gateway" value="stripe">
+                        <i class="fas fa-university"></i> Stripe
+                    </label>
+                </div>
+                
+                <div class="payment-actions">
+                    <button class="btn-cancel" onclick="closePaymentModal()">Cancel</button>
+                    <button class="btn-confirm" onclick="confirmPayment()">
+                        <i class="fas fa-lock"></i> Secure Payment
+                    </button>
+                </div>
+                
+                <div class="payment-security">
+                    <i class="fas fa-shield-alt"></i> 256-bit SSL Encryption
+                </div>
+            </div>
         </div>
     </div>
 
