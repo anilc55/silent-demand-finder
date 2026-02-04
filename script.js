@@ -1,3 +1,5 @@
+// Main JavaScript for Silent Demand Finder
+
 // DOM Elements
 const searchBtn = document.getElementById('searchBtn');
 const keywordInput = document.getElementById('keywordInput');
@@ -6,312 +8,592 @@ const findingsSection = document.getElementById('findingsSection');
 const findingsGrid = document.getElementById('findingsGrid');
 const currentKeyword = document.getElementById('currentKeyword');
 const loadingOverlay = document.getElementById('loadingOverlay');
-const exampleTags = document.querySelectorAll('.example-tag');
-const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-const navLinks = document.querySelector('.nav-links');
+const paymentModal = document.getElementById('paymentModal');
+const paymentAmount = document.getElementById('paymentAmount');
+const paymentPlan = document.getElementById('paymentPlan');
 
-// Silent Demand Data
-const silentDemandData = {
-    'AI': {
-        findings: [
-            {
-                type: 'WHY',
-                title: 'WHY',
-                description: '"AI" ko log search karte hain par openly discuss nahi karte because they feel it\'s too technical or they don\'t want to appear inexperienced.',
-                tags: ['AI Education', 'Beginner Friendly', 'Hidden Interest']
-            },
-            {
-                type: 'HOW',
-                title: 'HOW',
-                description: '"AI" beginners ke liye step-by-step kaise shuru kare without coding background - YouTube tutorials, no-code tools, practical projects.',
-                tags: ['Step-by-Step', 'No Code', 'Practical']
-            },
-            {
-                type: 'PROBLEM',
-                title: 'PROBLEM',
-                description: '"AI" se related real problems jo chup-chaap search karee hain - job replacement fears, implementation costs, technical complexity.',
-                tags: ['Job Security', 'Cost', 'Implementation']
-            },
-            {
-                type: 'COMPARE',
-                title: 'COMPARE',
-                description: '"AI" vs alternatives – kaunsa better aur sasta hai for small businesses: AI tools vs traditional software vs manual processes.',
-                tags: ['Cost Analysis', 'ROI', 'Alternatives']
-            },
-            {
-                type: 'MISTAKE',
-                title: 'MISTAKE',
-                description: 'Beginners ki common galtiyan jo paisa aur waqt barbaad karti hain - wrong tools, unrealistic expectations, no clear goals.',
-                tags: ['Common Errors', 'Time Waste', 'Money Loss']
-            },
-            {
-                type: 'SECRET',
-                title: 'SECRET',
-                description: '"AI" ke hidden tricks jo professionals openly nahi batate - prompt engineering secrets, free tools, automation workflows.',
-                tags: ['Insider Tips', 'Hacks', 'Professional Secrets']
-            }
-        ]
-    },
-    'Passive Income': {
-        findings: [
-            {
-                type: 'WHY',
-                title: 'WHY',
-                description: 'People search "passive income" but don\'t discuss openly because they fear judgment or don\'t want to share their methods.',
-                tags: ['Financial Freedom', 'Side Hustle', 'Quiet Search']
-            },
-            {
-                type: 'HOW',
-                title: 'HOW',
-                description: 'Real step-by-step methods that actually work without large investment - digital products, affiliate marketing, micro-SaaS.',
-                tags: ['Actionable', 'Low Investment', 'Proven']
-            },
-            {
-                type: 'PROBLEM',
-                title: 'PROBLEM',
-                description: 'Hidden problems: scams, time commitment, scalability issues that people search about but don\'t ask publicly.',
-                tags: ['Scams', 'Time', 'Scalability']
-            },
-            {
-                type: 'COMPARE',
-                title: 'COMPARE',
-                description: 'Different passive income methods compared - which ones actually work vs which are just hype.',
-                tags: ['Comparison', 'Real Results', 'Hype vs Reality']
-            },
-            {
-                type: 'MISTAKE',
-                title: 'MISTAKE',
-                description: 'Common mistakes: wrong niche selection, poor monetization, neglecting marketing.',
-                tags: ['Niche Selection', 'Monetization', 'Marketing']
-            },
-            {
-                type: 'SECRET',
-                title: 'SECRET',
-                description: 'Secrets successful creators don\'t share: specific platforms, automation tools, outsourcing tips.',
-                tags: ['Platforms', 'Automation', 'Outsourcing']
-            }
-        ]
-    },
-    'YouTube Growth': {
-        findings: [
-            {
-                type: 'WHY',
-                title: 'WHY',
-                description: 'Creators search for "YouTube growth" secretly to avoid competition and algorithm gaming accusations.',
-                tags: ['Algorithm', 'Competition', 'Secret Tactics']
-            },
-            {
-                type: 'HOW',
-                title: 'HOW',
-                description: 'Actual growth strategies that work beyond basic advice - thumbnail psychology, watch time hacks, community building.',
-                tags: ['Thumbnails', 'Watch Time', 'Community']
-            },
-            {
-                type: 'PROBLEM',
-                title: 'PROBLEM',
-                description: 'Unspoken problems: burnout, creative blocks, demonetization fears, algorithm changes.',
-                tags: ['Burnout', 'Creativity', 'Algorithm']
-            },
-            {
-                type: 'COMPARE',
-                title: 'COMPARE',
-                description: 'Different growth services compared - which actually deliver vs which are scams.',
-                tags: ['Services', 'Real Results', 'Scams']
-            },
-            {
-                type: 'MISTAKE',
-                title: 'MISTAKE',
-                description: 'Common mistakes: wrong niche, poor pacing, ignoring analytics, inconsistent uploads.',
-                tags: ['Niche', 'Consistency', 'Analytics']
-            },
-            {
-                type: 'SECRET',
-                title: 'SECRET',
-                description: 'Secrets successful YouTubers hide: specific editing software, promotion methods, collaboration networks.',
-                tags: ['Editing', 'Promotion', 'Networking']
-            }
-        ]
-    },
-    'Freelancing': {
-        findings: [
-            {
-                type: 'WHY',
-                title: 'WHY',
-                description: 'People secretly search freelancing tips to transition without alerting current employers or appearing desperate.',
-                tags: ['Career Change', 'Discreet', 'Transition']
-            },
-            {
-                type: 'HOW',
-                title: 'HOW',
-                description: 'Step-by-step guide to start freelancing: portfolio building, client acquisition, pricing strategies.',
-                tags: ['Portfolio', 'Clients', 'Pricing']
-            },
-            {
-                type: 'PROBLEM',
-                title: 'PROBLEM',
-                description: 'Hidden problems: client management, payment issues, work-life balance, feast or famine cycles.',
-                tags: ['Clients', 'Payment', 'Balance']
-            },
-            {
-                type: 'COMPARE',
-                title: 'COMPARE',
-                description: 'Freelancing platforms compared - which are best for beginners vs experienced freelancers.',
-                tags: ['Platforms', 'Beginners', 'Experts']
-            },
-            {
-                type: 'MISTAKE',
-                title: 'MISTAKE',
-                description: 'Common mistakes: underpricing, poor contracts, scope creep, ignoring taxes.',
-                tags: ['Pricing', 'Contracts', 'Taxes']
-            },
-            {
-                type: 'SECRET',
-                title: 'SECRET',
-                description: 'Secrets successful freelancers don\'t share: niche specialization, retainer agreements, referral systems.',
-                tags: ['Specialization', 'Retainers', 'Referrals']
-            }
-        ]
+// Global Variables
+let selectedPlan = '';
+let selectedGateway = 'razorpay';
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initializeEventListeners();
+    setupExampleTags();
+    setupMobileMenu();
+});
+
+// Initialize Event Listeners
+function initializeEventListeners() {
+    // Search button click
+    if (searchBtn) {
+        searchBtn.addEventListener('click', performSearch);
     }
-};
-
-// Function to show loading
-function showLoading() {
-    loadingOverlay.style.display = 'flex';
-}
-
-// Function to hide loading
-function hideLoading() {
-    loadingOverlay.style.display = 'none';
-}
-
-// Function to analyze keyword
-function analyzeKeyword(keyword) {
-    showLoading();
     
-    // Simulate API delay
-    setTimeout(() => {
-        keyword = keyword.trim();
-        
-        if (!keyword) {
-            alert('Please enter a keyword');
-            hideLoading();
-            return;
-        }
-        
-        // Update current keyword display
-        currentKeyword.textContent = keyword;
-        
-        // Show sections
-        metricsSection.style.display = 'block';
-        findingsSection.style.display = 'block';
-        
-        // Scroll to metrics section
-        metricsSection.scrollIntoView({ behavior: 'smooth' });
-        
-        // Get data for keyword or use default AI data
-        const data = silentDemandData[keyword] || silentDemandData['AI'];
-        
-        // Clear previous findings
-        findingsGrid.innerHTML = '';
-        
-        // Add new findings
-        data.findings.forEach(finding => {
-            const findingCard = document.createElement('div');
-            findingCard.className = `finding-card finding-${finding.type.toLowerCase()}`;
-            
-            findingCard.innerHTML = `
-                <div class="finding-header">
-                    <div class="finding-icon icon-${finding.type.toLowerCase()}">
-                        ${finding.type.charAt(0)}
-                    </div>
-                    <h3 class="finding-title">${finding.title}</h3>
-                </div>
-                <p class="finding-description">${finding.description}</p>
-                <div class="finding-tags">
-                    ${finding.tags.map(tag => `<span class="finding-tag">${tag}</span>`).join('')}
-                </div>
-            `;
-            
-            findingsGrid.appendChild(findingCard);
+    // Enter key in search input
+    if (keywordInput) {
+        keywordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+    
+    // Close modal on outside click
+    if (paymentModal) {
+        paymentModal.addEventListener('click', function(e) {
+            if (e.target === paymentModal) {
+                closePaymentModal();
+            }
+        });
+    }
+    
+    // Gateway selection
+    const gatewayOptions = document.querySelectorAll('input[name="gateway"]');
+    gatewayOptions.forEach(option => {
+        option.addEventListener('change', function() {
+            selectedGateway = this.value;
+            updateGatewaySelection();
+        });
+    });
+}
+
+// Setup Example Tags
+function setupExampleTags() {
+    const exampleTags = document.querySelectorAll('.example-tag');
+    exampleTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+            keywordInput.value = this.textContent;
+            performSearch();
+        });
+    });
+}
+
+// Setup Mobile Menu
+function setupMobileMenu() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
         });
         
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    }
+}
+
+// Perform Search
+function performSearch() {
+    const keyword = keywordInput.value.trim();
+    
+    if (!keyword) {
+        alert('Please enter a keyword to search');
+        keywordInput.focus();
+        return;
+    }
+    
+    showLoading();
+    
+    // Update current keyword
+    currentKeyword.textContent = keyword;
+    
+    // Show sections
+    metricsSection.style.display = 'block';
+    findingsSection.style.display = 'block';
+    
+    // Simulate API call delay
+    setTimeout(() => {
+        // Generate findings
+        generateFindings(keyword);
+        
+        // Hide loading
         hideLoading();
         
-        // Update metrics with random variations (simulating real-time analysis)
-        updateMetrics(keyword);
+        // Scroll to results
+        metricsSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+        
+        // Log search (for analytics)
+        logSearch(keyword);
         
     }, 1500);
 }
 
-// Function to update metrics
-function updateMetrics(keyword) {
-    const metricValues = document.querySelectorAll('.metric-value');
-    const progressBars = document.querySelectorAll('.progress-bar');
+// Generate Findings
+function generateFindings(keyword) {
+    if (!findingsGrid) return;
     
-    // Generate random metrics based on keyword
-    const metrics = {
-        'Demand Type': ['Hidden +', 'Silent Search', 'Unexplored +'][Math.floor(Math.random() * 3)],
-        'Intent Level': ['High + Monetizable', 'Medium + Monetizable', 'Very High'][Math.floor(Math.random() * 3)],
-        'Competition': ['Low to Medium', 'Very Low', 'Medium'][Math.floor(Math.random() * 3)],
-        'Status': ['AI + Real-time Logic', 'Analyzing...', 'Live Data'][Math.floor(Math.random() * 3)]
-    };
+    findingsGrid.innerHTML = '';
     
-    const progressWidths = [
-        Math.floor(Math.random() * 30) + 70, // 70-100%
-        Math.floor(Math.random() * 30) + 70, // 70-100%
-        Math.floor(Math.random() * 40) + 20, // 20-60%
-        Math.floor(Math.random() * 20) + 80  // 80-100%
+    const findings = [
+        {
+            type: 'why',
+            title: `Why People Search "${keyword}"`,
+            description: `Users secretly want to master ${keyword} but feel overwhelmed by complex information. They want simple, actionable steps that aren't publicly discussed.`,
+            tags: ['Hidden Need', 'Emotional Search', 'Beginner Friendly'],
+            color: '#3b82f6',
+            icon: '❓'
+        },
+        {
+            type: 'how',
+            title: `How to Monetize "${keyword}"`,
+            description: `Create micro-products addressing specific pain points. Use affiliate marketing with tools that people search for but can't find easily.`,
+            tags: ['Monetization', 'Affiliate', 'Digital Product'],
+            color: '#10b981',
+            icon: '💰'
+        },
+        {
+            type: 'problem',
+            title: `Unspoken Problems in "${keyword}"`,
+            description: `People struggle with implementation, not theory. They search for "done-for-you" solutions but find only theoretical advice.`,
+            tags: ['Implementation', 'Solutions', 'Pain Points'],
+            color: '#ef4444',
+            icon: '⚠️'
+        },
+        {
+            type: 'compare',
+            title: `${keyword} vs Alternatives`,
+            description: `Searchers compare options but find biased reviews. They want honest, side-by-side comparisons that aren't influenced by affiliate commissions.`,
+            tags: ['Comparison', 'Review', 'Unbiased'],
+            color: '#8b5cf6',
+            icon: '⚖️'
+        },
+        {
+            type: 'mistake',
+            title: `Common Mistakes in ${keyword}`,
+            description: `Beginners waste time on wrong approaches. They search for "shortcut methods" and "quick wins" that actually work but aren't shared publicly.`,
+            tags: ['Mistakes', 'Shortcuts', 'Time-Saving'],
+            color: '#f59e0b',
+            icon: '🚫'
+        },
+        {
+            type: 'secret',
+            title: `Secret Strategies for ${keyword}`,
+            description: `Advanced users search for loopholes and untapped methods not shared in public forums. These are high-value, low-competition opportunities.`,
+            tags: ['Advanced', 'Secret', 'Untapped'],
+            color: '#ec4899',
+            icon: '🔒'
+        }
     ];
     
-    metricValues.forEach((metric, index) => {
-        const metricType = metric.previousElementSibling.textContent;
-        if (metrics[metricType]) {
-            metric.textContent = metrics[metricType];
-        }
-    });
-    
-    progressBars.forEach((bar, index) => {
-        bar.style.width = `${progressWidths[index]}%`;
+    findings.forEach(finding => {
+        const card = document.createElement('div');
+        card.className = `finding-card finding-${finding.type}`;
+        
+        card.innerHTML = `
+            <div class="finding-header">
+                <div class="finding-icon" style="background: ${finding.color}">
+                    ${finding.icon}
+                </div>
+                <h3 class="finding-title">${finding.title}</h3>
+            </div>
+            <p class="finding-description">${finding.description}</p>
+            <div class="finding-tags">
+                ${finding.tags.map(tag => `<span class="finding-tag">${tag}</span>`).join('')}
+            </div>
+            <div class="monetization-link">
+                <button class="btn-monetize" onclick="showMonetization('${finding.type}', '${keyword}')">
+                    <i class="fas fa-money-bill-wave"></i> Monetize This
+                </button>
+            </div>
+        `;
+        
+        findingsGrid.appendChild(card);
     });
 }
 
-// Event Listeners
-searchBtn.addEventListener('click', () => {
-    const keyword = keywordInput.value || 'AI';
-    analyzeKeyword(keyword);
-});
-
-keywordInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        const keyword = keywordInput.value || 'AI';
-        analyzeKeyword(keyword);
-    }
-});
-
-// Example tag clicks
-exampleTags.forEach(tag => {
-    tag.addEventListener('click', () => {
-        keywordInput.value = tag.textContent;
-        analyzeKeyword(tag.textContent);
+// Show Monetization Options
+function showMonetization(type, keyword) {
+    const monetizationLinks = {
+        'why': {
+            title: `Create a Course on "${keyword}"`,
+            description: `People searching "why" want deep understanding. Create a course explaining the fundamentals.`,
+            links: [
+                { name: 'Udemy Course', url: 'https://www.udemy.com/create-course/', affiliate: true },
+                { name: 'Teachable', url: 'https://teachable.com/', affiliate: true },
+                { name: 'YouTube Monetization', url: 'https://www.youtube.com/creators/how-to/', affiliate: false }
+            ]
+        },
+        'how': {
+            title: `Monetize "${keyword}" Tutorials`,
+            description: `"How-to" searches indicate buying intent. Create tutorials with affiliate links.`,
+            links: [
+                { name: 'Amazon Associates', url: 'https://affiliate-program.amazon.com/', affiliate: true },
+                { name: 'ShareASale', url: 'https://www.shareasale.com/', affiliate: true },
+                { name: 'ClickBank', url: 'https://www.clickbank.com/', affiliate: true }
+            ]
+        },
+        'problem': {
+            title: `Solve Problems in "${keyword}"`,
+            description: `Create solutions for common problems. Sell templates, checklists, or consulting.`,
+            links: [
+                { name: 'Gumroad', url: 'https://gumroad.com/', affiliate: false },
+                { name: 'Consulting Services', url: 'https://calendly.com/', affiliate: false },
+                { name: 'Fiverr', url: 'https://www.fiverr.com/', affiliate: true }
+            ]
+        },
+        'compare': {
+            title: `Create Comparison Content`,
+            description: `Build comparison sites or detailed reviews with affiliate links.`,
+            links: [
+                { name: 'Affiliate Comparison Site', url: 'https://wordpress.org/', affiliate: false },
+                { name: 'Product Review Blog', url: 'https://www.blogger.com/', affiliate: false },
+                { name: 'YouTube Comparisons', url: 'https://www.youtube.com/', affiliate: false }
+            ]
+        },
+        'mistake': {
+            title: `Avoid Mistakes Guide`,
+            description: `Create checklists or courses showing how to avoid common mistakes.`,
+            links: [
+                { name: 'Ebook on Kindle', url: 'https://kdp.amazon.com/', affiliate: false },
+                { name: 'Checklist Template', url: 'https://www.canva.com/', affiliate: true },
+                { name: 'Workshop', url: 'https://zoom.us/', affiliate: false }
+            ]
+        },
+        'secret': {
+            title: `Premium Secrets Community`,
+            description: `Create a paid community or newsletter sharing secret strategies.`,
+            links: [
+                { name: 'Patreon', url: 'https://www.patreon.com/', affiliate: false },
+                { name: 'Substack', url: 'https://substack.com/', affiliate: false },
+                { name: 'Discord Community', url: 'https://discord.com/', affiliate: false }
+            ]
+        }
+    };
+    
+    const monetization = monetizationLinks[type];
+    if (!monetization) return;
+    
+    let linksHTML = monetization.links.map(link => `
+        <div class="monetization-option">
+            <a href="${link.url}" target="_blank" class="monetization-link-item">
+                ${link.name} ${link.affiliate ? '<span class="affiliate-badge">Affiliate</span>' : ''}
+            </a>
+            <button onclick="copyLink('${link.url}')" class="btn-copy-link">
+                <i class="fas fa-copy"></i> Copy
+            </button>
+        </div>
+    `).join('');
+    
+    const modalHTML = `
+        <div class="monetization-modal" id="monetizationModal">
+            <div class="modal-content">
+                <h3>${monetization.title}</h3>
+                <p>${monetization.description}</p>
+                <div class="monetization-links">
+                    ${linksHTML}
+                </div>
+                <div class="modal-actions">
+                    <button onclick="closeMonetizationModal()" class="btn-close">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Remove existing modal if any
+    const existingModal = document.getElementById('monetizationModal');
+    if (existingModal) existingModal.remove();
+    
+    // Add new modal
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Show modal
+    const modal = document.getElementById('monetizationModal');
+    modal.style.display = 'flex';
+    
+    // Close on outside click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeMonetizationModal();
+        }
     });
-});
+}
 
-// Mobile menu toggle
-mobileMenuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-        navLinks.classList.remove('active');
+// Close Monetization Modal
+function closeMonetizationModal() {
+    const modal = document.getElementById('monetizationModal');
+    if (modal) {
+        modal.style.display = 'none';
+        setTimeout(() => modal.remove(), 300);
     }
-});
+}
 
-// Initialize with default analysis
-window.addEventListener('DOMContentLoaded', () => {
-    // Analyze default keyword on page load
+// Copy Link to Clipboard
+function copyLink(url) {
+    navigator.clipboard.writeText(url)
+        .then(() => {
+            alert('Link copied to clipboard!');
+        })
+        .catch(err => {
+            console.error('Copy failed:', err);
+            alert('Failed to copy link');
+        });
+}
+
+// Payment Gateway Functions
+function selectGateway(gateway) {
+    selectedGateway = gateway;
+    
+    // Update UI
+    const options = document.querySelectorAll('.payment-option');
+    options.forEach(option => {
+        if (option.onclick.toString().includes(gateway)) {
+            option.style.background = '#667eea';
+            option.style.color = 'white';
+        } else {
+            option.style.background = '#f1f5f9';
+            option.style.color = 'inherit';
+        }
+    });
+}
+
+function processPayment(plan) {
+    selectedPlan = plan;
+    
+    const prices = {
+        'pro': 499,
+        'enterprise': 1999
+    };
+    
+    if (paymentAmount) paymentAmount.value = `₹${prices[plan]}`;
+    if (paymentPlan) paymentPlan.value = plan.toUpperCase();
+    
+    // Show payment modal
+    if (paymentModal) {
+        paymentModal.style.display = 'flex';
+    }
+}
+
+function updateGatewaySelection() {
+    const gatewayOptions = document.querySelectorAll('.gateway-option');
+    gatewayOptions.forEach(option => {
+        const input = option.querySelector('input');
+        if (input.value === selectedGateway) {
+            option.classList.add('active');
+        } else {
+            option.classList.remove('active');
+        }
+    });
+}
+
+function confirmPayment() {
+    const amount = paymentAmount ? paymentAmount.value : '';
+    const plan = paymentPlan ? paymentPlan.value : '';
+    const gateway = selectedGateway;
+    
+    if (!amount || !plan || !gateway) {
+        alert('Please complete payment details');
+        return;
+    }
+    
+    showLoading();
+    
+    // Simulate payment processing
     setTimeout(() => {
-        analyzeKeyword('AI');
-    }, 1000);
-});
+        hideLoading();
+        closePaymentModal();
+        
+        // Show success message
+        const successHTML = `
+            <div class="payment-success">
+                <div class="success-icon">✓</div>
+                <h3>Payment Successful!</h3>
+                <p>Your ${plan} plan has been activated.</p>
+                <p>Gateway: ${gateway.toUpperCase()}</p>
+                <p>Amount: ${amount}</p>
+                <button onclick="closeSuccessModal()" class="btn-success">Continue</button>
+            </div>
+        `;
+        
+        // Remove existing success modal
+        const existingSuccess = document.querySelector('.payment-success-overlay');
+        if (existingSuccess) existingSuccess.remove();
+        
+        // Add success modal
+        const overlay = document.createElement('div');
+        overlay.className = 'payment-success-overlay';
+        overlay.innerHTML = successHTML;
+        document.body.appendChild(overlay);
+        
+        // In production, redirect to payment gateway
+        // switch(gateway) {
+        //     case 'razorpay':
+        //         window.location.href = 'https://razorpay.com/payment-link';
+        //         break;
+        //     case 'paypal':
+        //         window.location.href = 'https://paypal.com/payment';
+        //         break;
+        //     case 'stripe':
+        //         window.location.href = 'https://stripe.com/payment';
+        //         break;
+        // }
+        
+    }, 2000);
+}
+
+function closePaymentModal() {
+    if (paymentModal) {
+        paymentModal.style.display = 'none';
+    }
+}
+
+function closeSuccessModal() {
+    const successModal = document.querySelector('.payment-success-overlay');
+    if (successModal) {
+        successModal.remove();
+    }
+}
+
+// Admin Panel Redirect
+function redirectToAdmin() {
+    const password = prompt('Enter admin password:');
+    // In production, use proper authentication
+    if (password === 'admin123') {
+        // Open admin panel in new tab
+        window.open('admin/admin.html', '_blank');
+        
+        // Or redirect in same tab
+        // window.location.href = 'admin/admin.html';
+    } else {
+        alert('Invalid password! Contact administrator.');
+    }
+}
+
+// Loading Functions
+function showLoading() {
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'flex';
+    }
+}
+
+function hideLoading() {
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'none';
+    }
+}
+
+// Log Search (for analytics)
+function logSearch(keyword) {
+    const searches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
+    
+    // Add new search
+    searches.unshift({
+        keyword: keyword,
+        timestamp: new Date().toISOString(),
+        id: Date.now()
+    });
+    
+    // Keep only last 10 searches
+    if (searches.length > 10) {
+        searches.pop();
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('recentSearches', JSON.stringify(searches));
+    
+    // Log to console (for debugging)
+    console.log(`Search logged: ${keyword}`);
+}
+
+// Security Functions
+function generateSecurityToken() {
+    const timestamp = Date.now();
+    const random = Math.random().toString(36).substr(2, 9);
+    const token = btoa(`${timestamp}-${random}-${navigator.userAgent}`);
+    return token;
+}
+
+// Scroll to Top Function
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// Initialize scroll to top button
+function initScrollTop() {
+    const scrollTopBtn = document.createElement('div');
+    scrollTopBtn.className = 'scroll-top';
+    scrollTopBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+    scrollTopBtn.onclick = scrollToTop;
+    document.body.appendChild(scrollTopBtn);
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.style.display = 'flex';
+        } else {
+            scrollTopBtn.style.display = 'none';
+        }
+    });
+}
+
+// Initialize on page load
+window.onload = function() {
+    initScrollTop();
+    
+    // Check for saved searches
+    const recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
+    if (recentSearches.length > 0) {
+        console.log('Recent searches:', recentSearches);
+    }
+};
+
+// API Functions (for future integration)
+async function callAPI(endpoint, data = {}) {
+    showLoading();
+    
+    try {
+        const response = await fetch(`/api/${endpoint}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        hideLoading();
+        
+        if (!response.ok) {
+            throw new Error(result.error || 'API call failed');
+        }
+        
+        return result;
+    } catch (error) {
+        hideLoading();
+        console.error('API Error:', error);
+        alert(`Error: ${error.message}`);
+        throw error;
+    }
+}
+
+// Export Data (for admin)
+function exportData(format = 'json') {
+    const data = {
+        searches: JSON.parse(localStorage.getItem('recentSearches') || '[]'),
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent
+    };
+    
+    let content, mimeType, fileName;
+    
+    switch(format) {
+        case 'json':
+            content = JSON.stringify(data, null, 2);
+            mimeType = 'application/json';
+            fileName = `silent-demand-dat
