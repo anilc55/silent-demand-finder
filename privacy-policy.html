@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Silent Demand Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Privacy Policy Specific Styles */
+        .privacy-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding-top: 80px;
+        }
+        
+        .privacy-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .privacy-header h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .privacy-meta {
+            color: #718096;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .privacy-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .privacy-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .privacy-section h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .privacy-section p {
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-list {
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .privacy-list li {
+            color: #4a5568;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            padding-left: 0.5rem;
+        }
+        
+        .privacy-list li strong {
+            color: #2d3748;
+        }
+        
+        .privacy-note {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            margin: 2rem 0;
+        }
+        
+        .privacy-note h4 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .privacy-contact {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .privacy-contact h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #4a5568;
+        }
+        
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .section-icon {
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .privacy-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .privacy-header h1 {
+                font-size: 2rem;
+            }
+            
+            .privacy-meta {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .privacy-contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        /* Data Collection Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .data-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .data-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .data-essential { background: #10b98120; color: #10b981; }
+        .data-analytics { background: #3b82f620; color: #3b82f6; }
+        .data-marketing { background: #8b5cf620; color: #8b5cf6; }
+        .data-optional { background: #f59e0b20; color: #f59e0b; }
+    </style>
+</head>
+<body>
+    <div class="privacy-container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">Silent Demand Finder</div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#paymentSection" class="nav-link">Pricing</a>
+                    <a href="index.html#adminSection" class="nav-link">Admin</a>
+                    <a href="privacy-policy.html" class="nav-link active">
+                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Privacy Policy Content -->
+        <div class="container">
+            <div class="privacy-content">
+                <div class="privacy-header">
+                    <h1>Privacy Policy</h1>
+                    <div class="privacy-meta">
+                        <div class="privacy-meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Last Updated: December 1, 2023</span>
+                        </div>
+                        <div class="privacy-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Effective Date: December 1, 2023</span>
+                        </div>
+                        <div class="privacy-meta-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Version: 2.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Introduction -->
+                <div class="privacy-section">
+                    <h2>
+                        <i class="fas fa-info-circle section-icon"></i>
+                        1. Introduction
+                    </h2>
+                    <p>Welcome to Silent Demand Finder. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+                    
+                    <div class="privacy-note">
+                        <h4><i class="fas fa-lightbulb"></i> Important Note</h4>
+                        <p>We do not sell your personal data. All data is used solely for providing and improving our services.</p>
+                    </div>
+                </div>
+
+                <!-- Data Collection -->
+                <div class="privacy-section">
+                    <h2>
+                        <i class="fas fa-database section-icon"></i>
+                        2. Data We Collect
+                    </h2>
+                    <p>We collect minimal data necessary to provide our service:</p>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data Type</th>
+                                <th>Purpose</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Search Keywords</td>
+                                <td>To provide AI analysis and insights</td>
+                                <td><span class="data-type data-essential">Essential</span></td>
+                            </tr>
+                            <tr>
+                                <td>Usage Patterns</td>
+                                <td>To improve our AI algorithms</td>
+                                <td><span class="data-type data-analytics">Analytics</span></td>
+                            </tr>
+                            <tr>
+                                <td>Payment Information</td>
+                                <td>To process subscriptions (via secure gateways)</td>
+                                <td><span class="data-type data-essential">Essential</span></td>
+                            </tr>
+                            <tr>
+                                <td>Account Information</td>
+                                <td>To manage your account and provide support</td>
+                                <td><span class="data-type data-essential">Essential</span></td>
+                            </tr>
+                            <tr>
+                                <td>Browser Information</td>
+                                <td>To optimize website performance</td>
+                                <td><span class="data-type data-analytics">Analytics</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p><strong>Note:</strong> All search data is anonymized and aggregated. We cannot identify individual users from search keywords.</p>
+                </div>
+
+                <!-- How We Use Data -->
+                <div class="privacy-section">
+                    <h2>
+                        <i class="fas fa-cogs section-icon"></i>
+                        3. How We Use Your Data
+                    </h2>
+                    <p>We use your data only for legitimate business purposes:</p>
+                    
+                    <ul class="privacy-list">
+                        <li>
+                            <strong>Service Delivery:</strong> To provide AI-powered demand analysis and insights
+                        </li>
+                        <li>
+                            <strong>Improvement:</strong> To enhance our AI algorithms and user experience
+                        </li>
+                        <li>
+                            <strong>Communication:</strong> To send important updates and notifications
+                        </li>
+                        <li>
+                            <strong>Payment Processing:</strong> To handle subscription payments securely
+                        </li>
+                        <li>
+                            <strong>Security:</strong> To prevent fraud and protect our services
+                        </li>
+                        <li>
+                            <strong>Compliance:</strong> To meet legal and regulatory requirements
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Data Protection -->
+                <div class="privacy-section">
+                    <h2>
+                        <i class="fas fa-shield-alt section-icon"></i>
+                        4. Data Protection
+                    </h2>
+                    <p>We implement industry-standard security measures:</p>
+                    
+                    <ul class="privacy-list">
+                        <li>
+                            <strong>End-to-End Encryption:</strong> All data transmissions are encrypted using TLS 1.3
+                        </li>
+                        <li>
+                            <strong>Secure Storage:</strong> Data is stored on secure servers with AES-256 encryption
+                        </li>
+                        <li>
+                            <strong>Regular Audits:</strong> We conduct regular security audits and vulnerability assessments
+                        </li>
+                        <li>
+                            <strong>Access Control:</strong> Strict access controls and authentication mechanisms
+                        </li>
+                        <li>
+                            <strong>GDPR Compliance:</strong> We comply with General Data Protection Regulation standards
+                        </li>
+                        <li>
+                            <strong>Data Minimization:</strong> We collect only necessary data and retain it for limited periods
+                        </li>
+                    </ul>
+                    
+                    <div class="privacy-note">
+                        <h4><i class="fas fa-lock"></i> Security Features</h4>
+                        <p>Our platform uses 256-bit SSL encryption, secure payment gateways (Razorpay, PayPal, Stripe), and regular security updates to protect your data.</p>
+                    </div>
+                </div>
+
+                <!-- Third-Party Services -->
+                <div class="privacy-section">
+                    <h2>
+                        <i class="fas fa-external-link-alt section-icon"></i>
+                        5. Third-Party Services
+                    </h2>
+                    <p>We use trusted third-party services to enhance our platform:</p>
+                    
+                    <ul class="privacy-list">
+                        <li>
+                            <strong>Payment Processors:</strong> Razorpay, PayPal, Stripe for secure payments
+                        </li>
+                        <li>
+                            <strong>Analytics:</strong> Google Analytics (anonymized data only)
+                        </li>
+                        <li>
+                            <strong>Hosting:</strong> Secure cloud hosting providers
+                        </li>
+                        <li>
+                            <strong>Email Services:</strong> For transactional emails and notifications
+                        </li>
+                    </ul>
+                    
+                    <p>All third-party services are GDPR compliant and have strict data protection policies.</p>
+                </div>
+
+                <!-- Your Rights -->
+                <div class="privacy-section">
+                    <h2>
+                        <i class="fas fa-user-check section-icon"></i>
+                        6. Your Rights
+                    </h2>
+                    <p>You have the following rights regarding your personal data:</p>
+                    
+                    <ul class="privacy-list">
+                        <li>
+                            <strong>Right to Access:</strong> Request a copy of your personal data
+                        </li>
+                        <li>
+                            <strong>Right to Rectification:</strong> Correct inaccurate or incomplete data
+                        </li>
+                        <li>
+                            <strong>Right to Erasure:</strong> Request deletion of your personal data
+                        </li>
+                        <li>
+                            <strong>Right to Restrict Processing:</strong> Limit how we use your data
+                        </li>
+                        <li>
+                            <strong>Right to Data Portability:</strong> Receive your data in a structured format
+                        </li>
+                        <li>
+                            <strong>Right to Object:</strong> Object to certain types of processing
+                        </li>
+                        <li>
+                            <strong>Right to Withdraw Consent:</strong> Withdraw consent at any time
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Cookies -->
+                <div class="privacy-section">
+                    <h2>
+                        <i class="fas fa-cookie-bite section-icon"></i>
+                        7. Cookies Policy
+                    </h2>
+                    <p>We use minimal cookies for essential functionality:</p>
+                    
+                    <ul class="privacy-list">
+                        <li>
+                            <strong>Essential Cookies:</strong> Required for basic website functionality
+                        </li>
+                        <li>
+                            <strong>Analytics Cookies:</strong> Help us understand how users interact with our site
+                        </li>
+                        <li>
+                            <strong>Preference Cookies:</strong> Remember your settings and preferences
+                        </li>
+                    </ul>
+                    
+                    <p>You can control cookies through your browser settings. Disabling cookies may affect some features.</p>
+                </div>
+
+                <!-- Children's Privacy -->
+                <div class="privacy-section">
+                    <h2>
+                        <i class="fas fa-child section-icon"></i>
+                        8. Children's Privacy
+                    </h2>
+                    <p>Our services are not directed to individuals under 18 years of age. We do not knowingly collect personal data from children. If you are a parent or guardian and believe your child has provided us with personal data, please contact us immediately.</p>
+                </div>
+
+                <!-- International Transfers -->
+                <div class="privacy-section">
+                    <h2>
+                        <i class="fas fa-globe section-icon"></i>
+                        9. International Data Transfers
+                    </h2>
+                    <p>Your data may be transferred to and processed in countries other than your own. We ensure that appropriate safeguards are in place to protect your data in accordance with this privacy policy and applicable laws.</p>
+                </div>
+
+                <!-- Changes to Policy -->
+                <div class="privacy-section">
+                    <h2>
+                        <i class="fas fa-sync-alt section-icon"></i>
+                        10. Changes to This Policy
+                    </h2>
+                    <p>We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page and updating the "Last Updated" date. We encourage you to review this pri
