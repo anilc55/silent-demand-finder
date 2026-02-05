@@ -1,0 +1,35 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "debug": true
+  },
+  "api": {
+    "rate_limit": {
+      "free": 10,
+      "pro": 100,
+      "enterprise": 1000
+    },
+    "mock_data": true,
+    "cache_duration": 3600
+  },
+  "payment_gateways": {
+    "razorpay": {
+      "key_id": "rzp_test_YOUR_KEY",
+      "key_secret": "YOUR_SECRET"
+    },
+    "stripe": {
+      "publishable_key": "pk_test_YOUR_KEY",
+      "secret_key": "sk_test_YOUR_KEY"
+    },
+    "paypal": {
+      "client_id": "YOUR_CLIENT_ID",
+      "secret": "YOUR_SECRET"
+    }
+  },
+  "admin": {
+    "username": "admin",
+    "password": "admin123",
+    "email": "admin@silentdemand.com"
+  }
+}
