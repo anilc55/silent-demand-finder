@@ -3,27 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silent Demand Finder</title>
+    <title>Silent Demand Finder - Discover Hidden Opportunities Worldwide</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.6.6/css/flag-icons.min.css">
 </head>
 <body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn" id="langBtn">
+            <span class="fi fi-us" id="currentFlag"></span>
+            <span id="currentLang">English</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+            <div class="lang-search">
+                <input type="text" id="langSearch" placeholder="Search language...">
+            </div>
+            <div class="lang-list">
+                <a href="#" data-lang="en" class="lang-option active">
+                    <span class="fi fi-us"></span> English
+                </a>
+                <a href="#" data-lang="hi" class="lang-option">
+                    <span class="fi fi-in"></span> हिन्दी (Hindi)
+                </a>
+                <a href="#" data-lang="es" class="lang-option">
+                    <span class="fi fi-es"></span> Español (Spanish)
+                </a>
+                <a href="#" data-lang="fr" class="lang-option">
+                    <span class="fi fi-fr"></span> Français (French)
+                </a>
+                <a href="#" data-lang="de" class="lang-option">
+                    <span class="fi fi-de"></span> Deutsch (German)
+                </a>
+                <a href="#" data-lang="ar" class="lang-option">
+                    <span class="fi fi-sa"></span> العربية (Arabic)
+                </a>
+                <a href="#" data-lang="ja" class="lang-option">
+                    <span class="fi fi-jp"></span> 日本語 (Japanese)
+                </a>
+                <a href="#" data-lang="ru" class="lang-option">
+                    <span class="fi fi-ru"></span> Русский (Russian)
+                </a>
+                <a href="#" data-lang="pt" class="lang-option">
+                    <span class="fi fi-br"></span> Português (Portuguese)
+                </a>
+                <a href="#" data-lang="zh" class="lang-option">
+                    <span class="fi fi-cn"></span> 中文 (Chinese)
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">Silent Demand Finder</div>
+            <div class="logo" data-i18n="app_name">Silent Demand Finder</div>
             <div class="nav-links">
-                <a href="#" class="nav-link active">Home</a>
-                <a href="#" class="nav-link">Dashboard</a>
-                <a href="#" class="nav-link">Premium</a>
-                <a href="#" class="nav-link api-link">
-                    <i class="fas fa-key"></i> API 
-                    <span class="api-badge">PRO</span>
+                <a href="index.html" class="nav-link active" data-i18n="nav_home">Home</a>
+                <a href="dashboard.html" class="nav-link" data-i18n="nav_dashboard">Dashboard</a>
+                <a href="premium.html" class="nav-link" data-i18n="nav_premium">Premium</a>
+                <a href="javascript:void(0)" class="nav-link api-link" onclick="openApiModal()" data-i18n="nav_api">
+                    <i class="fas fa-key"></i> API Access
+                    <span class="api-badge" data-i18n="badge_pro">PRO</span>
                 </a>
-                <div class="nav-buttons">
-                    <a href="#" class="btn-login">Login</a>
-                    <a href="#" class="btn-login">Sign Up</a>
+                <div class="nav-buttons" id="authButtons">
+                    <a href="javascript:void(0)" class="btn-login" onclick="openLoginModal()" data-i18n="btn_login">Login</a>
+                    <a href="javascript:void(0)" class="btn-login" onclick="openSignupModal()" data-i18n="btn_signup">Sign Up</a>
+                </div>
+                <div class="user-profile" id="userProfile" style="display: none;">
+                    <img src="https://ui-avatars.com/api/?name=User&background=667eea&color=fff" alt="Profile" class="profile-pic" id="userAvatar">
+                    <div class="profile-menu">
+                        <span id="userName">User</span>
+                        <div class="dropdown-menu">
+                            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span data-i18n="menu_dashboard">Dashboard</span></a>
+                            <a href="premium.html"><i class="fas fa-crown"></i> <span data-i18n="menu_premium">Premium</span></a>
+                            <a href="#" onclick="openApiModal()"><i class="fas fa-key"></i> <span data-i18n="menu_api">API Keys</span></a>
+                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span data-i18n="menu_logout">Logout</span></a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <button class="mobile-menu-btn">
@@ -35,22 +94,28 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1 class="hero-title">Log jo search kar rahe hain – par openly bol nahi rahe</h1>
-            <p class="hero-subtitle">Discover hidden demand jise monetize kar sakte ho but competition kam hai</p>
+            <h1 class="hero-title" data-i18n="hero_title">What People Search But Don't Talk About</h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">Discover hidden demand with high monetization potential and low competition</p>
             
             <div class="search-container">
                 <div class="search-box">
-                    <input type="text" class="search-input" placeholder="Enter a keyword (AI, Jobs, YouTube...)" id="keywordInput">
+                    <input type="text" class="search-input" id="keywordInput" placeholder="Enter keyword (AI, Business, Marketing...)" data-i18n-placeholder="search_placeholder">
                     <button class="btn-search" id="searchBtn">
-                        <i class="fas fa-search"></i> Find Silent Demand
+                        <i class="fas fa-search"></i> <span data-i18n="btn_search">Find Silent Demand</span>
                     </button>
                 </div>
                 <div class="search-examples">
-                    Try: <span class="example-tag">AI</span>
-                    <span class="example-tag">Passive Income</span>
-                    <span class="example-tag">YouTube Growth</span>
-                    <span class="example-tag">Freelancing</span>
+                    <span data-i18n="search_try">Try:</span>
+                    <span class="example-tag" onclick="searchKeyword('AI')" data-i18n="example_ai">AI</span>
+                    <span class="example-tag" onclick="searchKeyword('Business')" data-i18n="example_business">Business</span>
+                    <span class="example-tag" onclick="searchKeyword('Marketing')" data-i18n="example_marketing">Marketing</span>
+                    <span class="example-tag" onclick="searchKeyword('Investment')" data-i18n="example_investment">Investment</span>
                 </div>
+            </div>
+            
+            <div class="global-indicator">
+                <i class="fas fa-globe-americas"></i>
+                <span data-i18n="global_available">Available in 10+ languages worldwide</span>
             </div>
         </div>
     </section>
@@ -59,17 +124,17 @@
     <section class="metrics" id="metricsSection" style="display: none;">
         <div class="container">
             <div class="section-header">
-                <h2>Analysis for: <span id="currentKeyword">AI</span></h2>
+                <h2 data-i18n="analysis_for">Analysis for:</h2> <span id="currentKeyword">AI</span>
                 <div class="analysis-time">
-                    <i class="fas fa-clock"></i> Real-time Analysis
+                    <i class="fas fa-clock"></i> <span data-i18n="real_time">Real-time Analysis</span>
                 </div>
             </div>
             
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-icon">🔍</div>
-                    <h3>Demand Type</h3>
-                    <div class="metric-value">Hidden +</div>
+                    <h3 data-i18n="metric_demand">Demand Type</h3>
+                    <div class="metric-value" data-i18n="demand_hidden">Hidden +</div>
                     <div class="metric-progress">
                         <div class="progress-bar" style="width: 85%"></div>
                     </div>
@@ -77,8 +142,8 @@
                 
                 <div class="metric-card">
                     <div class="metric-icon">🎯</div>
-                    <h3>Intent Level</h3>
-                    <div class="metric-value">High + Monetizable</div>
+                    <h3 data-i18n="metric_intent">Intent Level</h3>
+                    <div class="metric-value" data-i18n="intent_high">High + Monetizable</div>
                     <div class="metric-progress">
                         <div class="progress-bar" style="width: 90%"></div>
                     </div>
@@ -86,8 +151,8 @@
                 
                 <div class="metric-card">
                     <div class="metric-icon">📊</div>
-                    <h3>Competition</h3>
-                    <div class="metric-value">Low to Medium</div>
+                    <h3 data-i18n="metric_competition">Competition</h3>
+                    <div class="metric-value" data-i18n="competition_low">Low to Medium</div>
                     <div class="metric-progress">
                         <div class="progress-bar" style="width: 40%"></div>
                     </div>
@@ -95,8 +160,8 @@
                 
                 <div class="metric-card">
                     <div class="metric-icon">🤖</div>
-                    <h3>Status</h3>
-                    <div class="metric-value">AI + Real-time Logic</div>
+                    <h3 data-i18n="metric_status">Analysis Status</h3>
+                    <div class="metric-value" data-i18n="status_active">AI + Real-time</div>
                     <div class="metric-progress">
                         <div class="progress-bar" style="width: 100%"></div>
                     </div>
@@ -108,34 +173,47 @@
     <!-- Findings Section -->
     <section class="findings" id="findingsSection" style="display: none;">
         <div class="container">
-            <h2 class="section-title">Silent Demand Findings</h2>
-            <p class="section-subtitle">AI analysis based on hidden search patterns and user behavior</p>
+            <h2 class="section-title" data-i18n="findings_title">Silent Demand Findings</h2>
+            <p class="section-subtitle" data-i18n="findings_subtitle">AI-powered analysis based on hidden search patterns and user behavior</p>
             
             <div class="findings-grid" id="findingsGrid">
-                <!-- Findings will be dynamically added here -->
+                <!-- Dynamic content -->
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works">
+    <!-- Monetization Section -->
+    <section class="monetization-section">
         <div class="container">
-            <h2 class="section-title">How Silent Demand Finder Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Enter Keyword</h3>
-                    <p>Type any topic, niche, or keyword you're interested in</p>
+            <h2 class="section-title" data-i18n="monetization_title">Monetization System</h2>
+            <p class="section-subtitle" data-i18n="monetization_subtitle">Turn discoveries into revenue with proven methods</p>
+            
+            <div class="monetization-grid">
+                <div class="monetization-card">
+                    <div class="monetization-icon">
+                        <i class="fas fa-ad"></i>
+                    </div>
+                    <h3 data-i18n="monetization_ad">Ad Revenue</h3>
+                    <p data-i18n="monetization_ad_desc">Earn through Google AdSense, affiliate marketing, sponsored content</p>
+                    <div class="revenue-estimate">$500 - $5,000/month</div>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>AI Analysis</h3>
-                    <p>Our AI analyzes search patterns, forums, and social media</p>
+                
+                <div class="monetization-card">
+                    <div class="monetization-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 data-i18n="monetization_product">Product Sales</h3>
+                    <p data-i18n="monetization_product_desc">Create digital products, ebooks, courses, software tools</p>
+                    <div class="revenue-estimate">$1,000 - $10,000/month</div>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Get Insights</h3>
-                    <p>Discover hidden opportunities with low competition</p>
+                
+                <div class="monetization-card">
+                    <div class="monetization-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 data-i18n="monetization_service">Services</h3>
+                    <p data-i18n="monetization_service_desc">Offer consulting, freelancing, agency services, implementation</p>
+                    <div class="revenue-estimate">$2,000 - $20,000/month</div>
                 </div>
             </div>
         </div>
@@ -144,35 +222,35 @@
     <!-- Payment Gateway Section -->
     <section class="payment-section" id="paymentSection">
         <div class="container">
-            <h2 class="section-title">Premium Subscription Plans</h2>
-            <p class="section-subtitle">Upgrade to unlock advanced features</p>
+            <h2 class="section-title" data-i18n="payment_title">Premium Subscription Plans</h2>
+            <p class="section-subtitle" data-i18n="payment_subtitle">Upgrade to unlock advanced features</p>
             
             <div class="payment-grid">
                 <div class="payment-card">
-                    <div class="plan-badge basic">BASIC</div>
-                    <h3>Free Plan</h3>
-                    <div class="price">₹0<span>/month</span></div>
+                    <div class="plan-badge basic" data-i18n="plan_basic">BASIC</div>
+                    <h3 data-i18n="plan_free">Free Plan</h3>
+                    <div class="price">$0<span data-i18n="per_month">/month</span></div>
                     <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> 5 searches per day</li>
-                        <li><i class="fas fa-check"></i> Basic analysis</li>
-                        <li><i class="fas fa-times"></i> No API access</li>
-                        <li><i class="fas fa-times"></i> Limited data</li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature_5_searches">5 searches per day</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature_basic">Basic analysis</span></li>
+                        <li><i class="fas fa-times"></i> <span data-i18n="feature_no_api">No API access</span></li>
+                        <li><i class="fas fa-times"></i> <span data-i18n="feature_limited">Limited data</span></li>
                     </ul>
-                    <button class="btn-payment current-plan" disabled>Current Plan</button>
+                    <button class="btn-payment current-plan" disabled data-i18n="btn_current">Current Plan</button>
                 </div>
                 
                 <div class="payment-card popular">
-                    <div class="plan-badge pro">POPULAR</div>
-                    <h3>Pro Plan</h3>
-                    <div class="price">₹499<span>/month</span></div>
+                    <div class="plan-badge pro" data-i18n="plan_popular">POPULAR</div>
+                    <h3 data-i18n="plan_pro">Pro Plan</h3>
+                    <div class="price">$9<span data-i18n="per_month">/month</span></div>
                     <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> Unlimited searches</li>
-                        <li><i class="fas fa-check"></i> Advanced analysis</li>
-                        <li><i class="fas fa-check"></i> Basic API access</li>
-                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature_unlimited">Unlimited searches</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature_advanced">Advanced analysis</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature_api">Basic API access</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature_support">Priority support</span></li>
                     </ul>
-                    <button class="btn-payment" onclick="processPayment('pro')">
-                        <i class="fas fa-bolt"></i> Upgrade Now
+                    <button class="btn-payment" onclick="processPayment('pro', 9)">
+                        <i class="fas fa-bolt"></i> <span data-i18n="btn_upgrade">Upgrade Now</span>
                     </button>
                     <div class="payment-options">
                         <button class="payment-option" onclick="selectGateway('razorpay')">
@@ -184,40 +262,57 @@
                         <button class="payment-option" onclick="selectGateway('stripe')">
                             <i class="fas fa-university"></i> Stripe
                         </button>
+                        <button class="payment-option" onclick="selectGateway('bank')">
+                            <i class="fas fa-bank"></i> <span data-i18n="bank_transfer">Bank Transfer</span>
+                        </button>
                     </div>
                 </div>
                 
                 <div class="payment-card">
-                    <div class="plan-badge enterprise">ENTERPRISE</div>
-                    <h3>Enterprise</h3>
-                    <div class="price">₹1,999<span>/month</span></div>
+                    <div class="plan-badge enterprise" data-i18n="plan_enterprise">ENTERPRISE</div>
+                    <h3 data-i18n="plan_enterprise_title">Enterprise</h3>
+                    <div class="price">$29<span data-i18n="per_month">/month</span></div>
                     <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> Everything in Pro</li>
-                        <li><i class="fas fa-check"></i> Full API access</li>
-                        <li><i class="fas fa-check"></i> White label</li>
-                        <li><i class="fas fa-check"></i> Dedicated support</li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature_all_pro">Everything in Pro</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature_full_api">Full API access</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature_white_label">White label</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="feature_dedicated">Dedicated support</span></li>
                     </ul>
-                    <button class="btn-payment" onclick="processPayment('enterprise')">
-                        <i class="fas fa-crown"></i> Contact Sales
+                    <button class="btn-payment" onclick="processPayment('enterprise', 29)">
+                        <i class="fas fa-crown"></i> <span data-i18n="btn_contact">Contact Sales</span>
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Admin Access Section -->
-    <section class="admin-section" id="adminSection">
+    <!-- Global Reach Section -->
+    <section class="global-section">
         <div class="container">
-            <div class="admin-access">
-                <i class="fas fa-lock admin-icon"></i>
-                <h3>Admin Access</h3>
-                <p>Secure admin panel for managing API keys, monetization, and subscriptions</p>
-                <button class="btn-admin" onclick="redirectToAdmin()">
-                    <i class="fas fa-user-shield"></i> Access Admin Panel
-                </button>
-                <p class="admin-note">
-                    <i class="fas fa-shield-alt"></i> Secure access with 2FA enabled
-                </p>
+            <h2 class="section-title" data-i18n="global_title">Worldwide Availability</h2>
+            <p class="section-subtitle" data-i18n="global_subtitle">Working across countries and languages</p>
+            
+            <div class="global-grid">
+                <div class="global-card">
+                    <i class="fas fa-language"></i>
+                    <h3 data-i18n="global_languages">10+ Languages</h3>
+                    <p data-i18n="global_languages_desc">Full interface translation</p>
+                </div>
+                <div class="global-card">
+                    <i class="fas fa-globe"></i>
+                    <h3 data-i18n="global_countries">50+ Countries</h3>
+                    <p data-i18n="global_countries_desc">Market analysis worldwide</p>
+                </div>
+                <div class="global-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3 data-i18n="global_currencies">Multiple Currencies</h3>
+                    <p data-i18n="global_currencies_desc">USD, EUR, INR, GBP, more</p>
+                </div>
+                <div class="global-card">
+                    <i class="fas fa-credit-card"></i>
+                    <h3 data-i18n="global_payments">Global Payments</h3>
+                    <p data-i18n="global_payments_desc">All major gateways supported</p>
+                </div>
             </div>
         </div>
     </section>
@@ -225,35 +320,35 @@
     <!-- Features -->
     <section class="features">
         <div class="container">
-            <h2 class="section-title">Why Choose Silent Demand Finder</h2>
+            <h2 class="section-title" data-i18n="features_title">Why Choose Silent Demand Finder</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3>AI Powered</h3>
-                    <p>Advanced AI detects patterns humans miss</p>
+                    <h3 data-i18n="feature_ai">AI Powered</h3>
+                    <p data-i18n="feature_ai_desc">Advanced AI detects patterns humans miss</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-language"></i>
                     </div>
-                    <h3>Real-time Data</h3>
-                    <p>Live analysis from multiple data sources</p>
+                    <h3 data-i18n="feature_multilingual">Multi-Language</h3>
+                    <p data-i18n="feature_multilingual_desc">Works in your native language</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-money-bill-wave"></i>
                     </div>
-                    <h3>Monetization Tips</h3>
-                    <p>Practical ways to profit from findings</p>
+                    <h3 data-i18n="feature_monetization">Monetization</h3>
+                    <p data-i18n="feature_monetization_desc">Practical ways to profit from findings</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-user-secret"></i>
                     </div>
-                    <h3>Privacy Focused</h3>
-                    <p>Anonymous analysis, no data storage</p>
+                    <h3 data-i18n="feature_privacy">Privacy Focused</h3>
+                    <p data-i18n="feature_privacy_desc">Anonymous analysis, no data storage</p>
                 </div>
             </div>
         </div>
@@ -263,95 +358,12 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">Silent Demand Finder</div>
-                <p class="footer-tagline">Discover what people search for but don't talk about</p>
+                <div class="footer-logo" data-i18n="app_name">Silent Demand Finder</div>
+                <p class="footer-tagline" data-i18n="footer_tagline">Discover what people search for but don't talk about</p>
                 
                 <div class="footer-links">
                     <a href="privacy-policy.html" class="footer-link">
-                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                        <i class="fas fa-shield-alt"></i> <span data-i18n="footer_privacy">Privacy Policy</span>
                     </a>
                     <a href="#" class="footer-link">
-                        <i class="fas fa-file-contract"></i> Terms of Service
-                    </a>
-                    <a href="#" class="footer-link">
-                        <i class="fas fa-envelope"></i> Contact Us
-                    </a>
-                    <a href="#" class="footer-link">
-                        <i class="fas fa-info-circle"></i> About
-                    </a>
-                    <a href="#paymentSection" class="footer-link">
-                        <i class="fas fa-credit-card"></i> Payment Gateway
-                    </a>
-                    <a href="#adminSection" class="footer-link">
-                        <i class="fas fa-user-shield"></i> Admin Panel
-                    </a>
-                </div>
-                
-                <div class="footer-security">
-                    <div class="security-badge">
-                        <i class="fas fa-lock"></i> SSL Secured
-                    </div>
-                    <div class="security-badge">
-                        <i class="fas fa-shield-alt"></i> GDPR Compliant
-                    </div>
-                    <div class="security-badge">
-                        <i class="fas fa-user-lock"></i> Data Encrypted
-                    </div>
-                </div>
-                
-                <div class="copyright">
-                    © 2023 Silent Demand Finder • Free Tool Now • Premium Unlock Coming Soon
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-content">
-            <div class="spinner"></div>
-            <h3>Analyzing Silent Demand...</h3>
-            <p>Scanning hidden patterns and user behavior</p>
-        </div>
-    </div>
-
-    <!-- Payment Modal -->
-    <div class="payment-modal" id="paymentModal">
-        <div class="modal-content">
-            <h3>Complete Your Payment</h3>
-            <div class="payment-form">
-                <input type="text" id="paymentAmount" placeholder="Amount (₹)" readonly>
-                <input type="text" id="paymentPlan" placeholder="Plan" readonly>
-                
-                <div class="gateway-options">
-                    <label class="gateway-option active">
-                        <input type="radio" name="gateway" value="razorpay" checked>
-                        <i class="fas fa-credit-card"></i> Razorpay
-                    </label>
-                    <label class="gateway-option">
-                        <input type="radio" name="gateway" value="paypal">
-                        <i class="fab fa-paypal"></i> PayPal
-                    </label>
-                    <label class="gateway-option">
-                        <input type="radio" name="gateway" value="stripe">
-                        <i class="fas fa-university"></i> Stripe
-                    </label>
-                </div>
-                
-                <div class="payment-actions">
-                    <button class="btn-cancel" onclick="closePaymentModal()">Cancel</button>
-                    <button class="btn-confirm" onclick="confirmPayment()">
-                        <i class="fas fa-lock"></i> Secure Payment
-                    </button>
-                </div>
-                
-                <div class="payment-security">
-                    <i class="fas fa-shield-alt"></i> 256-bit SSL Encryption
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-    </html>
+                  
