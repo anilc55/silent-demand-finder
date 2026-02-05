@@ -427,19 +427,6 @@ function confirmPayment() {
         overlay.innerHTML = successHTML;
         document.body.appendChild(overlay);
         
-        // In production, redirect to payment gateway
-        // switch(gateway) {
-        //     case 'razorpay':
-        //         window.location.href = 'https://razorpay.com/payment-link';
-        //         break;
-        //     case 'paypal':
-        //         window.location.href = 'https://paypal.com/payment';
-        //         break;
-        //     case 'stripe':
-        //         window.location.href = 'https://stripe.com/payment';
-        //         break;
-        // }
-        
     }, 2000);
 }
 
@@ -463,9 +450,6 @@ function redirectToAdmin() {
     if (password === 'admin123') {
         // Open admin panel in new tab
         window.open('admin/admin.html', '_blank');
-        
-        // Or redirect in same tab
-        // window.location.href = 'admin/admin.html';
     } else {
         alert('Invalid password! Contact administrator.');
     }
@@ -596,4 +580,22 @@ function exportData(format = 'json') {
         case 'json':
             content = JSON.stringify(data, null, 2);
             mimeType = 'application/json';
-            fileName = `silent-demand-dat
+            fileName = `silent-demand-data-${Date.now()}.json`;
+            break;
+        case 'csv':
+            // Convert to CSV
+            const csvRows = [];
+            csvRows.push(['Keyword', 'Timestamp']);
+            data.searches.forEach(search => {
+                csvRows.push([search.keyword, search.timestamp]);
+            });
+            content = csvRows.map(row => row.join(',')).join('\n');
+            mimeType = 'text/csv';
+            fileName = `silent-demand-data-${Date.now()}.csv`;
+            break;
+        default:
+            alert('Unsupported format');
+            return;
+    }
+    
+    // Create down
