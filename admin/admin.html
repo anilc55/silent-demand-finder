@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Silent Demand Finder</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Login Screen -->
+        <div class="login-screen" id="loginScreen">
+            <div class="login-box">
+                <div class="login-header">
+                    <div class="login-logo">
+                        <i class="fas fa-user-shield"></i>
+                        <h2>Admin Panel</h2>
+                    </div>
+                    <p class="login-subtitle">Secure Access Required</p>
+                </div>
+                
+                <div class="login-form">
+                    <div class="input-group">
+                        <label for="adminUsername">
+                            <i class="fas fa-user"></i> Username
+                        </label>
+                        <input type="text" id="adminUsername" placeholder="Enter admin username" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="adminPassword">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <input type="password" id="adminPassword" placeholder="Enter password" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="admin2FA">
+                            <i class="fas fa-mobile-alt"></i> 2FA Code (Optional)
+                        </label>
+                        <input type="text" id="admin2FA" placeholder="6-digit code">
+                    </div>
+                    
+                    <div class="login-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button class="btn-login" onclick="adminLogin()">
+                        <i class="fas fa-sign-in-alt"></i> Secure Login
+                    </button>
+                    
+                    <div class="login-footer">
+                        <div class="security-info">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>All login attempts are monitored and logged</span>
+                        </div>
+                        <div class="server-status">
+                            <i class="fas fa-server"></i>
+                            <span id="serverStatus">Server: Online</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Admin Panel (Hidden by default) -->
+        <div class="admin-panel" id="adminPanel" style="display: none;">
+            <!-- Header -->
+            <div class="admin-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="brand">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Silent Demand Finder Admin</span>
+                    </div>
+                </div>
+                
+                <div class="header-center">
+                    <div class="quick-stats">
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span id="onlineUsers">0</span> Online
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-bolt"></i>
+                            <span id="apiCallsToday">0</span> API Calls
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-rupee-sign"></i>
+                            ₹<span id="todayRevenue">0</span> Today
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="admin-profile">
+                        <div class="profile-info">
+                            <span class="admin-name" id="adminName">Admin User</span>
+                            <span class="admin-role">Super Admin</span>
+                        </div>
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <div class="profile-dropdown">
+                            <a href="#"><i class="fas fa-user"></i> Profile</a>
+                            <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                            <a href="#" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count" id="notificationCount">3</span>
+                    </button>
+                    
+                    <div class="system-indicators">
+                        <div class="indicator cpu">
+                            <i class="fas fa-microchip"></i>
+                            <span id="cpuUsage">15%</span>
+                        </div>
+                        <div class="indicator memory">
+                            <i class="fas fa-memory"></i>
+                            <span id="memoryUsage">42%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="admin-sidebar" id="adminSidebar">
+                <div class="sidebar-menu">
+                    <div class="menu-section">
+                        <h3 class="section-title">DASHBOARD</h3>
+                        <a href="#" class="menu-item active" onclick="showSection('dashboard')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Overview</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3 class="section-title">MANAGEMENT</h3>
+                        <a href="#" class="menu-item" onclick="showSection('users')">
+                            <i class="fas fa-users"></i>
+                            <span>User Management</span>
+                            <span class="menu-badge" id="userCount">0</span>
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('subscriptions')">
+                            <i class="fas fa-crown"></i>
+                            <span>Subscriptions</span>
+                            <span class="menu-badge" id="subscriptionCount">0</span>
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('payments')">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Payment History</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3 class="section-title">API & SETTINGS</h3>
+                        <a href="#" class="menu-item" onclick="showSection('api')">
+                            <i class="fas fa-key"></i>
+                            <span>API Keys</span>
+                            <span class="menu-badge" id="apiKeyCount">0</span>
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('monetization')">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Monetization</span>
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('paymentGateways')">
+                            <i class="fas fa-wallet"></i>
+                            <span>Payment Gateways</span>
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('pricing')">
+                            <i class="fas fa-tag"></i>
+                            <span>Pricing Plans</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3 class="section-title">SYSTEM</h3>
+                        <a href="#" class="menu-item" onclick="showSection('analytics')">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Analytics</span>
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('logs')">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>System Logs</span>
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('security')">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Security</span>
+                        </a>
+                        <a href="#" class="menu-item" onclick="showSection('backup')">
+                            <i class="fas fa-database"></i>
+                            <span>Backup & Restore</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3 class="section-title">QUICK ACTIONS</h3>
+                        <button class="quick-action" onclick="generateAPIKey()">
+                            <i class="fas fa-plus"></i> New API Key
+                        </button>
+                        <button class="quick-action" onclick="showSection('monetization')">
+                            <i class="fas fa-link"></i> Update Affiliate Links
+                        </button>
+                        <button class="quick-action" onclick="exportData()">
+                            <i class="fas fa-download"></i> Export Data
+                        </button>
+                        <button class="quick-action" onclick="clearCache()">
+                            <i class="fas fa-broom"></i> Clear Cache
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="sidebar-footer">
+                    <div class="system-info">
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span id="serverTime">00:00:00</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-database"></i>
+                            <span id="dbSize">0 MB</span>
+                        </div>
+                    </div>
+                    <button class="btn-logout" onclick="adminLogout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="admin-content" id="adminContent">
+                <!-- Dashboard Section -->
+                <div class="section active" id="dashboardSection">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h2>
+                        <div class="header-actions">
+                            <button class="btn-refresh" onclick="refreshDashboard()">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                            <div class="date-range">
+                                <i class="fas fa-calendar"></i>
+                                <select id="dashboardRange">
+                                    <option value="today">Today</option>
+                                    <option value="week">This Week</option>
+                                    <option value="month" selected>This Month</option>
+                                    <option value="year">This Year</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card primary">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Total Users</h3>
+                                <div class="stat-value" id="totalUsers">0</div>
+                                <div class="stat-change">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span id="userGrowth">0%</span> from last month
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card success">
+                            <div class="stat-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Active Subscriptions</h3>
+                                <div class="stat-value" id="activeSubscriptions">0</div>
+                                <div class="stat-change">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span id="subscriptionGrowth">0%</span> from last month
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card warning">
+                            <div class="stat-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Total Revenue</h3>
+                                <div class="stat-value">₹<span id="totalRevenue">0</span></div>
+                                <div class="stat-change">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span id="revenueGrowth">0%</span> from last month
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card danger">
+                            <div class="stat-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>API Calls Today</h3>
+                                <div class="stat-value" id="dailyApiCalls">0</div>
+                                <div class="stat-change">
+                                    <i class="fas fa-arrow-down"></i>
+                                    <span id="apiChange">0%</span> from yesterday
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="charts-container">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Revenue Overview</h3>
+                                <div class="chart-legend">
+                                    <span class="legend-item">
+                                        <i class="fas fa-circle" style="color: #667eea;"></i> This Month
+                                    </span>
+                                    <span class="legend-item">
+                                        <i class="fas fa-circle" style="color: #a0aec0;"></i> Last Month
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>User Acquisition</h3>
+                                <select id="userChartRange">
+                                    <option value="week">Last 7 Days</option>
+                                    <option value="month" selected>Last 30 Days</option>
+                                </select>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="userChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-activities">
+                        <div class="activities-header">
+                            <h3>Recent Activities</h3>
+                            <a href="#" onclick="showSection('logs')" class="view-all">View All</a>
+                        </div>
+                        <div class="activities-list" id="activitiesList">
+                            <!-- Activities will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management Section -->
+                <div class="section" id="usersSection" style="display: none;">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> User Management</h2>
+                        <div class="header-actions">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="userSearch" placeholder="Search users...">
+                            </div>
+                            <button class="btn-primary" onclick="showAddUserModal()">
+                                <i class="fas fa-plus"></i> Add User
+                            </button>
+                            <button class="btn-export" onclick="exportUsers()">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="filters-row">
+                        <div class="filter-group">
+                            <label>Status:</label>
+                            <select id="userStatusFilter">
+                                <option value="all">All Users</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="banned">Banned</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Plan:</label>
+                            <select id="userPlanFilter">
+     
