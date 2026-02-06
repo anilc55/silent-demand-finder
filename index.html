@@ -4,693 +4,215 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silent Demand Finder</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Basic CSS Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f7fa;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        .header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo h1 {
-            color: #2c3e50;
-            font-size: 24px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #3498db;
-        }
-
-        .nav-links a.active {
-            color: #3498db;
-        }
-
-        .login-btn {
-            padding: 8px 20px;
-            border: 1px solid #3498db;
-            border-radius: 5px;
-        }
-
-        .upgrade-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white !important;
-            padding: 8px 20px;
-            border-radius: 5px;
-        }
-
-        .language-selector select {
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .hero-content h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-
-        .search-section {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .search-section h3 {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .search-box input {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-
-        .search-btn {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 0 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
-
-        .search-btn:hover {
-            background: #c0392b;
-        }
-
-        .language-tag {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Section Common Styles */
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 40px;
-        }
-
-        /* Monetization Section */
-        .monetization {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .monetization-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .card h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .card i {
-            color: #3498db;
-            margin-right: 10px;
-        }
-
-        .revenue {
-            background: #3498db;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 15px;
-            font-weight: 600;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 80px 0;
-            background: #f5f7fa;
-        }
-
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-
-        .basic {
-            border-top: 4px solid #95a5a6;
-        }
-
-        .pro {
-            border-top: 4px solid #3498db;
-            transform: scale(1.05);
-        }
-
-        .enterprise {
-            border-top: 4px solid #9b59b6;
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #e74c3c;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .plan-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .plan-header h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-
-        .price span {
-            font-size: 1rem;
-            color: #7f8c8d;
-        }
-
-        .plan-tag {
-            background: #ecf0f1;
-            color: #7f8c8d;
-            padding: 5px 15px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-
-        .plan-features {
-            list-style: none;
-            margin: 30px 0;
-        }
-
-        .plan-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .plan-features i {
-            margin-right: 10px;
-        }
-
-        .plan-features .fa-check {
-            color: #2ecc71;
-        }
-
-        .plan-features .fa-times {
-            color: #e74c3c;
-        }
-
-        .current-plan {
-            background: #2ecc71;
-            color: white;
-            text-align: center;
-            padding: 12px;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-weight: 600;
-        }
-
-        .upgrade-plan-btn, .contact-btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 20px;
-        }
-
-        .upgrade-plan-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .contact-btn {
-            background: #34495e;
-            color: white;
-        }
-
-        .payment-methods {
-            text-align: center;
-            margin-top: 20px;
-            color: #7f8c8d;
-        }
-
-        .payment-methods i {
-            font-size: 1.5rem;
-            margin: 0 10px;
-        }
-
-        /* Worldwide Section */
-        .worldwide {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .worldwide-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .feature {
-            text-align: center;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .feature h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .feature i {
-            color: #3498db;
-            margin-right: 10px;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 80px 0;
-            background: #f5f7fa;
-        }
-
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 40px auto 0;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: #3498db;
-            margin-bottom: 20px;
-        }
-
-        .feature-item h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        /* Footer */
-        .footer {
-            background: #2c3e50;
-            color: white;
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .footer-logo {
-            margin-bottom: 30px;
-        }
-
-        .footer-logo h2 {
-            margin-bottom: 10px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .footer-links a {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .copyright {
-            color: #95a5a6;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero-content h2 {
-                font-size: 2rem;
-            }
-            
-            .search-box {
-                flex-direction: column;
-            }
-            
-            .pricing-card.pro {
-                transform: none;
-            }
-            
-            .monetization-cards,
-            .pricing-cards,
-            .worldwide-features,
-            .feature-list {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="header">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
         <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <h1>Silent Demand Finder</h1>
+            <div class="logo">Silent Demand Finder</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#" class="nav-link">Dashboard</a>
+                <a href="#" class="nav-link">Premium</a>
+                <div class="nav-buttons">
+                    <a href="#" class="btn-login">Login</a>
+                    <a href="#" class="btn-login">Sign Up</a>
                 </div>
-                
-                <div class="nav-menu">
-                    <ul class="nav-links">
-                        <li><a href="#" class="active">Home</a></li>
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Premium</a></li>
-                        <li><a href="#">API Access</a></li>
-                        <li class="language-selector">
-                            <select id="languageSelect">
-                                <option value="en">English</option>
-                                <option value="hi">Hindi</option>
-                                <option value="es">Spanish</option>
-                                <option value="fr">French</option>
-                            </select>
-                        </li>
-                        <li><a href="#" class="login-btn">Login</a></li>
-                        <li><a href="#" class="upgrade-btn">Upgrade Now</a></li>
-                    </ul>
-                </div>
-                
-                <div class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-    </header>
+    </nav>
 
-    <!-- Hero Section (Updated with first code snippet) -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h2>What People Search But Don't Talk About</h2>
-                <p class="subtitle">Discover hidden demand with high monetization potential and low competition</p>
-                
-                <div class="search-section">
-                    <h3>Find Silent Demand</h3>
-                    <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="Businessman | Q. Search">
-                        <button class="search-btn" id="searchButton"><i class="fas fa-search"></i> Search</button>
-                    </div>
-                    <p class="language-tag">📌 Available in 10+ languages worldwide</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Monetization Section -->
-    <section class="monetization">
-        <div class="container">
-            <h2 class="section-title">Monetization System</h2>
-            <p class="section-subtitle">Turn discoveries into revenue with proven methods</p>
+            <h1 class="hero-title">Log jo search kar rahe hain – par openly bol nahi rahe</h1>
+            <p class="hero-subtitle">Discover hidden demand jise monetize kar sakte ho but competition kam hai</p>
             
-            <div class="monetization-cards">
-                <div class="card">
-                    <h3><i class="fas fa-ad"></i> Ad Revenue</h3>
-                    <p>Earn through Google Adsense, affiliate marketing, sponsored content</p>
-                    <div class="revenue">$100 - $5,000/month</div>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Enter a keyword (AI, Jobs, YouTube...)" id="keywordInput">
+                    <button class="btn-search" id="searchBtn">
+                        <i class="fas fa-search"></i> Find Silent Demand
+                    </button>
                 </div>
-                
-                <div class="card">
-                    <h3><i class="fas fa-shopping-cart"></i> Product Sales</h3>
-                    <p>Create digital products, ebooks, courses, software tools</p>
-                    <div class="revenue">$1,000 - $10,000/month</div>
-                </div>
-                
-                <div class="card">
-                    <h3><i class="fas fa-concierge-bell"></i> Services</h3>
-                    <p>Offer consulting, freelancing, agency services, implementation</p>
-                    <div class="revenue">$2,000 - $20,000/month</div>
+                <div class="search-examples">
+                    Try: <span class="example-tag">AI</span>
+                    <span class="example-tag">Passive Income</span>
+                    <span class="example-tag">YouTube Growth</span>
+                    <span class="example-tag">Freelancing</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="pricing">
+    <!-- Metrics Section -->
+    <section class="metrics" id="metricsSection" style="display: none;">
         <div class="container">
-            <h2 class="section-title">Premium Subscription Plans</h2>
-            <p class="section-subtitle">Upgrade to unlock advanced features</p>
+            <div class="section-header">
+                <h2>Analysis for: <span id="currentKeyword">AI</span></h2>
+                <div class="analysis-time">
+                    <i class="fas fa-clock"></i> Real-time Analysis
+                </div>
+            </div>
             
-            <div class="pricing-cards">
-                <!-- Basic Plan -->
-                <div class="pricing-card basic">
-                    <div class="plan-header">
-                        <h3>BASIC</h3>
-                        <div class="price">$0<span>/month</span></div>
-                        <div class="plan-tag">Free Plan</div>
-                    </div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> 5 searches per day</li>
-                        <li><i class="fas fa-check"></i> Basic analysis</li>
-                        <li><i class="fas fa-times"></i> No API access</li>
-                        <li><i class="fas fa-times"></i> Limited data</li>
-                    </ul>
-                    <div class="current-plan">Current Plan</div>
-                </div>
-                
-                <!-- Pro Plan -->
-                <div class="pricing-card pro">
-                    <div class="popular-badge">POPULAR</div>
-                    <div class="plan-header">
-                        <h3>PRO PLAN</h3>
-                        <div class="price">$9<span>/month</span></div>
-                        <div class="plan-tag">Pro Plan</div>
-                    </div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> Unlimited searches</li>
-                        <li><i class="fas fa-check"></i> Advanced analysis</li>
-                        <li><i class="fas fa-check"></i> Basic API access</li>
-                        <li><i class="fas fa-check"></i> Priority support</li>
-                    </ul>
-                    <button class="upgrade-plan-btn">Upgrade Now</button>
-                    <div class="payment-methods">
-                        <i class="fab fa-cc-stripe"></i>
-                        <i class="fab fa-cc-paypal"></i>
-                        <i class="fas fa-university"></i>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">🔍</div>
+                    <h3>Demand Type</h3>
+                    <div class="metric-value">Hidden +</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar" style="width: 85%"></div>
                     </div>
                 </div>
                 
-                <!-- Enterprise Plan -->
-                <div class="pricing-card enterprise">
-                    <div class="plan-header">
-                        <h3>ENTERPRISE</h3>
-                        <div class="price">$29<span>/month</span></div>
-                        <div class="plan-tag">Enterprise</div>
+                <div class="metric-card">
+                    <div class="metric-icon">🎯</div>
+                    <h3>Intent Level</h3>
+                    <div class="metric-value">High + Monetizable</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar" style="width: 90%"></div>
                     </div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> Everything in Pro</li>
-                        <li><i class="fas fa-check"></i> Full API access</li>
-                        <li><i class="fas fa-check"></i> White label</li>
-                        <li><i class="fas fa-check"></i> Dedicated support</li>
-                    </ul>
-                    <button class="contact-btn">Contact Sales</button>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">📊</div>
+                    <h3>Competition</h3>
+                    <div class="metric-value">Low to Medium</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar" style="width: 40%"></div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">🤖</div>
+                    <h3>Status</h3>
+                    <div class="metric-value">AI + Real-time Logic</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar" style="width: 100%"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Worldwide Section -->
-    <section class="worldwide">
+    <!-- Findings Section -->
+    <section class="findings" id="findingsSection" style="display: none;">
         <div class="container">
-            <h2 class="section-title">Worldwide Availability</h2>
-            <p class="section-subtitle">Working across countries and languages</p>
+            <h2 class="section-title">Silent Demand Findings</h2>
+            <p class="section-subtitle">AI analysis based on hidden search patterns and user behavior</p>
             
-            <div class="worldwide-features">
-                <div class="feature">
-                    <h3><i class="fas fa-language"></i> 10+ Languages</h3>
-                    <p>Full interface translation</p>
+            <div class="findings-grid" id="findingsGrid">
+                <!-- Findings will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How Silent Demand Finder Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Enter Keyword</h3>
+                    <p>Type any topic, niche, or keyword you're interested in</p>
                 </div>
-                
-                <div class="feature">
-                    <h3><i class="fas fa-globe-americas"></i> 50+ Countries</h3>
-                    <p>Market analysis worldwide</p>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Analysis</h3>
+                    <p>Our AI analyzes search patterns, forums, and social media</p>
                 </div>
-                
-                <div class="feature">
-                    <h3><i class="fas fa-money-bill-wave"></i> Multiple Currencies</h3>
-                    <p>USD, EUR, INR, GBP, more</p>
-                </div>
-                
-                <div class="feature">
-                    <h3><i class="fas fa-credit-card"></i> Global Payments</h3>
-                    <p>All major gateways supported</p>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Insights</h3>
+                    <p>Discover hidden opportunities with low competition</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Features -->
     <section class="features">
         <div class="container">
             <h2 class="section-title">Why Choose Silent Demand Finder</h2>
-            
-            <div class="feature-list">
-                <div class="feature-item">
+            <div class="features-grid">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-brain"></i>
                     </div>
- 
+                    <h3>AI Powered</h3>
+                    <p>Advanced AI detects patterns humans miss</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Real-time Data</h3>
+                    <p>Live analysis from multiple data sources</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Monetization Tips</h3>
+                    <p>Practical ways to profit from findings</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>Privacy Focused</h3>
+                    <p>Anonymous analysis, no data storage</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Silent Demand Finder</div>
+                <p class="footer-tagline">Discover what people search for but don't talk about</p>
+                
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">About</a>
+                </div>
+                
+                <div class="footer-cta">
+                    <div class="premium-badge">
+                        <i class="fas fa-crown"></i> Premium Unlock Coming Soon
+                    </div>
+                    <button class="btn-premium">
+                        <i class="fas fa-rocket"></i> Join Waitlist
+                    </button>
+                </div>
+                
+                <div class="copyright">
+                    © 2023 Silent Demand Finder • Free Tool Now • Premium Unlock Coming Soon
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h3>Analyzing Silent Demand...</h3>
+            <p>Scanning hidden patterns and user behavior</p>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</body>
+                    </html>
