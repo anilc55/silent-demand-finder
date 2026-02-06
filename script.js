@@ -599,3 +599,496 @@ function exportData(format = 'json') {
     }
     
     // Create down
+// ==================== API CONFIGURATION ====================
+const API_CONFIG = {
+    BASE_URL: 'http://localhost:5000/api',
+    MOCK_MODE: true, // Start with mock data
+    ENDPOINTS: {
+        SEARCH: '/search',
+        TRENDS: '/trends',
+        MONETIZATION: '/monetization',
+        GENERATE_KEY: '/generate_key',
+        VALIDATE_KEY: '/validate_key',
+        REGISTER: '/user/register',
+        LOGIN: '/user/login',
+        PAYMENT: '/payment/create'
+    }
+};
+
+// ==================== API SERVICE ====================
+class SilentDemandAPI {
+    constructor() {
+        this.baseUrl = API_CONFIG.BASE_URL;
+        this.mockMode = API_CONFIG.MOCK_MODE;
+    }
+    
+    // Search for keyword
+    async searchKeyword(keyword, apiKey = null) {
+        if (this.mockMode) {
+            return this.mockSearch(keyword);
+        }
+        
+        try {
+            const response = await fetch(`${this.baseUrl}/search`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    keyword: keyword,
+                    api_key: apiKey
+                })
+            });
+            
+            return await response.json();
+        } catch (error) {
+            console.error('API Error:', error);
+            return this.mockSearch(keyword);
+        }
+    }
+    
+    // Get trends
+    async getTrends(keyword, days = 30) {
+        try {
+            const response = await fetch(
+                `${this.baseUrl}/trends?keyword=${encodeURIComponent(keyword)}&days=${days}`
+            );
+            return await response.json();
+        } catch (error) {
+            return this.mockTrends(keyword);
+        }
+    }
+    
+    // Get monetization ideas
+    async getMonetizationIdeas(keyword) {
+        try {
+            const response = await fetch(
+                `${this.baseUrl}/monetization?keyword=${encodeURIComponent(keyword)}`
+            );
+            return await response.json();
+        } catch (error) {
+            return this.mockMonetization(keyword);
+        }
+    }
+    
+    // Generate API key
+    async generateApiKey(userId, plan = 'free') {
+        try {
+            const response = await fetch(`${this.baseUrl}/generate_key`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    plan: plan
+                })
+            });
+            
+            return await response.json();
+        } catch (error) {
+            return this.mockApiKey(userId, plan);
+        }
+    }
+    
+    // Register user
+    async registerUser(email, password, name) {
+        try {
+            const response = await fetch(`${this.baseUrl}/user/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    name: name
+                })
+            });
+            
+            return await response.json();
+        } catch (error) {
+            return this.mockRegister(email, name);
+        }
+    }
+    
+    // Login user
+    async loginUser(email, password) {
+        try {
+            const response = await fetch(`${this.baseUrl}/user/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+            
+            return await response.json();
+        } catch (error) {
+            return this.mockLogin(email, password);
+        }
+    }
+    
+    // Create payment
+    async createPayment(userId, amount, plan, gateway) {
+        try {
+            const response = await fetch(`${this.baseUrl}/payment/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    amount: amount,
+                    plan: plan,
+                    gateway: gateway
+                })
+            });
+            
+            return await response.json();
+        } catch (error) {
+            return this.mockPayment(userId, amount, plan);
+        }
+    }
+    
+    // ==================== MOCK DATA GENERATORS ====================
+    mockSearch(keyword) {
+        const demandScore = Math.floor(Math.random() * 50) + 50;
+        const competitionScore = Math.floor(Math.random() * 60) + 10;
+        const opportunityScore = Math.floor(Math.random() * 40) + 60;
+        
+        return {
+            success: true,
+            keyword: keyword,
+            analysis: {
+                demand_score: demandScore,
+                competition_score: competitionScore,
+                opportunity_score: opportunityScore,
+                monetization_ideas: this.generateMockIdeas(keyword),
+                recommendations: [
+                    `Create beginner-friendly ${keyword} tutorials`,
+                    `Build comparison articles for ${keyword} tools`,
+                    `Develop case studies showing ${keyword} results`,
+                    `Start affiliate marketing for ${keyword} products`
+                ]
+            }
+        };
+    }
+    
+    generateMockIdeas(keyword) {
+        const ideas = [
+            {
+                title: `${keyword} Online Course`,
+                revenue: `$${Math.floor(Math.random() * 5000) + 1000}/month`,
+                difficulty: 'Medium',
+                time: '2-4 weeks'
+            },
+            {
+                title: `${keyword} Affiliate Website`,
+                revenue: `$${Math.floor(Math.random() * 3000) + 500}/month`,
+                difficulty: 'Easy',
+                time: '1-2 weeks'
+            },
+            {
+                title: `${keyword} Consulting`,
+                revenue: `$${Math.floor(Math.random() * 10000) + 2000}/month`,
+                difficulty: 'Hard',
+                time: 'Ongoing'
+            }
+        ];
+        
+        return ideas.slice(0, Math.floor(Math.random() * 2) + 2);
+    }
+    
+    mockTrends(keyword) {
+        return {
+            success: true,
+            keyword: keyword,
+            trends: {
+                interest_over_time: Array.from({length: 12}, (_, i) => ({
+                    date: `2024-${String(i+1).padStart(2, '0')}-01`,
+                    value: Math.floor(Math.random() * 70) + 30
+                })),
+                related_queries: [
+                    {query: `${keyword} tutorial`, value: 85},
+                    {query: `learn ${keyword}`, value: 78},
+                    {query: `${keyword} for beginners`, value: 92},
+                    {query: `best ${keyword} tools`, value: 67}
+                ]
+            }
+        };
+    }
+    
+    mockMonetization(keyword) {
+        return {
+            success: true,
+            keyword: keyword,
+            monetization_ideas: this.generateMockIdeas(keyword)
+        };
+    }
+    
+    mockApiKey(userId, plan) {
+        const key = `mock_${userId}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        return {
+            success: true,
+            api_key: key,
+            plan: plan,
+            limits: {
+                daily_limit: plan === 'pro' ? 100 : 10,
+                monthly_limit: plan === 'pro' ? 1000 : 100
+            }
+        };
+    }
+    
+    mockRegister(email, name) {
+        return {
+            success: true,
+            user_id: `user_${Date.now()}`,
+            email: email,
+            name: name,
+            plan: 'free'
+        };
+    }
+    
+    mockLogin(email, password) {
+        if (email && password) {
+            return {
+                success: true,
+                user_id: `user_${Date.now()}`,
+                email: email,
+                name: email.split('@')[0],
+                plan: 'free'
+            };
+        }
+        return {success: false, error: 'Invalid credentials'};
+    }
+    
+    mockPayment(userId, amount, plan) {
+        return {
+            success: true,
+            payment_id: `pay_${Date.now()}`,
+            payment_url: '#',
+            amount: amount,
+            plan: plan,
+            status: 'pending'
+        };
+    }
+}
+
+// ==================== INTEGRATE WITH EXISTING CODE ====================
+// Initialize API
+const api = new SilentDemandAPI();
+
+// Update search function
+async function performSearch() {
+    const keyword = document.getElementById('keywordInput').value.trim();
+    if (!keyword) {
+        alert('Please enter a keyword');
+        return;
+    }
+    
+    showLoading();
+    
+    try {
+        // Get current user's API key if available
+        const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        const apiKey = user.apiKey;
+        
+        // Call API
+        const result = await api.searchKeyword(keyword, apiKey);
+        
+        // Update UI
+        updateAnalysisResults(keyword, result.analysis);
+        showFindings(keyword, result.analysis);
+        
+    } catch (error) {
+        console.error('Search error:', error);
+        // Fallback to mock
+        updateAnalysisResults(keyword);
+        showFindings(keyword);
+    } finally {
+        hideLoading();
+    }
+}
+
+// Update login function
+async function handleLogin() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    if (!email || !password) {
+        alert('Please fill all fields');
+        return;
+    }
+    
+    const result = await api.loginUser(email, password);
+    
+    if (result.success) {
+        currentUser = {
+            id: result.user_id,
+            name: result.name,
+            email: result.email,
+            plan: result.plan,
+            apiKey: result.api_key
+        };
+        
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        updateUIForLoggedInUser();
+        closeModal('loginModal');
+        alert('Login successful!');
+    } else {
+        alert(result.error || 'Login failed');
+    }
+}
+
+// Update signup function
+async function handleSignup() {
+    const name = document.getElementById('signupName').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('signupConfirmPassword').value;
+    
+    if (!name || !email || !password || !confirmPassword) {
+        alert('Please fill all fields');
+        return;
+    }
+    
+    if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+    }
+    
+    const result = await api.registerUser(email, password, name);
+    
+    if (result.success) {
+        currentUser = {
+            id: result.user_id,
+            name: result.name,
+            email: result.email,
+            plan: result.plan
+        };
+        
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        updateUIForLoggedInUser();
+        closeModal('signupModal');
+        alert('Account created successfully!');
+    } else {
+        alert(result.error || 'Signup failed');
+    }
+}
+
+// Generate API key
+async function generateApiKey(type) {
+    if (!currentUser) {
+        openLoginModal();
+        return;
+    }
+    
+    const result = await api.generateApiKey(currentUser.id, type);
+    
+    if (result.success) {
+        // Store API key
+        currentUser.apiKey = result.api_key;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        
+        // Show key to user
+        alert(`API Key Generated:\n\n${result.api_key}\n\nKeep this key secret!`);
+        
+        // Update API keys list
+        loadApiKeys();
+    }
+}
+
+// Process payment
+async function processPayment(plan, amount) {
+    if (!currentUser) {
+        openLoginModal();
+        return;
+    }
+    
+    currentPayment.plan = plan;
+    currentPayment.amount = amount;
+    
+    // Get selected gateway
+    const gateway = document.querySelector('input[name="gateway"]:checked').value;
+    
+    const result = await api.createPayment(currentUser.id, amount, plan, gateway);
+    
+    if (result.success) {
+        if (gateway === 'bank') {
+            showBankDetails(amount, plan);
+        } else {
+            alert(`Payment initiated! Payment ID: ${result.payment_id}`);
+            // Redirect to payment URL
+            if (result.payment_url !== '#') {
+                window.open(result.payment_url, '_blank');
+            }
+        }
+        
+        // Update user plan
+        currentUser.plan = plan;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    }
+}
+
+// ==================== UPDATE EXISTING FUNCTIONS ====================
+// Replace existing search function
+document.getElementById('searchBtn').addEventListener('click', performSearch);
+
+// Update search input to work with Enter key
+document.getElementById('keywordInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') performSearch();
+});
+
+// Update login form
+document.getElementById('loginForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    handleLogin();
+});
+
+// Update signup form
+document.getElementById('signupForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    handleSignup();
+});
+
+// Update API key generation
+function generateApiKeyWrapper(type) {
+    generateApiKey(type);
+}
+
+// Update payment processing
+function processPaymentWrapper(plan, amount) {
+    processPayment(plan, amount);
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Silent Demand Finder API Ready!');
+    console.log('Mode:', API_CONFIG.MOCK_MODE ? 'Mock Mode' : 'Real API Mode');
+    
+    // Auto-start backend check
+    checkBackendStatus();
+});
+
+// Check if backend is running
+async function checkBackendStatus() {
+    try {
+        const response = await fetch('http://localhost:5000/');
+        const data = await response.json();
+        
+        if (data.status === 'active') {
+            console.log('✅ Backend API is running');
+            API_CONFIG.MOCK_MODE = false;
+            
+            // Update API instance
+            api.mockMode = false;
+            api.baseUrl = 'http://localhost:5000/api';
+        }
+    } catch (error) {
+        console.log('⚠️ Using mock data mode. Start backend with: python backend/server.py');
+    }
+                        }
