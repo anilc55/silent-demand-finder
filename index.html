@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover hidden market demands that people search for but don't talk about. AI-powered analysis for entrepreneurs and creators.">
+    <meta name="keywords" content="market research, hidden demand, business ideas, monetization, AI analysis, trend spotting">
+    <meta name="author" content="Silent Demand Finder">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Silent Demand Finder - Discover Hidden Market Opportunities">
+    <meta property="og:description" content="Find what people search for but don't talk about. AI-powered market research tool.">
+    <meta property="og:image" content="https://yourusername.github.io/silent-demand-finder/assets/og-image.png">
+    <meta property="og:url" content="https://yourusername.github.io/silent-demand-finder">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Silent Demand Finder">
+    <meta name="twitter:description" content="Discover hidden market demands with AI analysis">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="icon" href="assets/favicon.ico">
+    
+    <title>Silent Demand Finder - Discover Hidden Market Opportunities</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.6.6/css/flag-icons.min.css">
+    
+    <!-- Analytics (Optional) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-search"></i>
+                <span>Silent Demand</span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="dashboard.html" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="premium.html" class="nav-link"><i class="fas fa-crown"></i> Premium</a>
+                <a href="#features" class="nav-link"><i class="fas fa-star"></i> Features</a>
+                <a href="#how-it-works" class="nav-link"><i class="fas fa-play-circle"></i> How It Works</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="btn btn-outline" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="btn btn-primary" id="signupBtn">
+                    <i class="fas fa-user-plus"></i> Sign Up Free
+                </button>
+                
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <button class="lang-btn">
+                        <span class="fi fi-us"></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="lang-dropdown">
+                        <a href="#" data-lang="en"><span class="fi fi-us"></span> English</a>
+                        <a href="#" data-lang="hi"><span class="fi fi-in"></span> हिन्दी</a>
+                        <a href="#" data-lang="es"><span class="fi fi-es"></span> Español</a>
+                        <a href="#" data-lang="fr"><span class="fi fi-fr"></span> Français</a>
+                    </div>
+                </div>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" class="mobile-link active"><i class="fas fa-home"></i> Home</a>
+            <a href="dashboard.html" class="mobile-link"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="premium.html" class="mobile-link"><i class="fas fa-crown"></i> Premium</a>
+            <a href="#features" class="mobile-link"><i class="fas fa-star"></i> Features</a>
+            <a href="#how-it-works" class="mobile-link"><i class="fas fa-play-circle"></i> How It Works</a>
+            <div class="mobile-actions">
+                <button class="btn btn-outline">Login</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Discover What People Search For But Don't Talk About</h1>
+                <p class="hero-subtitle">Uncover hidden market demands with AI-powered analysis. Find opportunities with high monetization potential and low competition.</p>
+                
+                <div class="hero-search">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" id="heroSearch" placeholder="Enter a keyword or topic (e.g., AI, marketing, remote work)">
+                        <button class="btn btn-primary btn-search" id="heroSearchBtn">
+                            <i class="fas fa-bolt"></i> Find Hidden Demand
+                        </button>
+                    </div>
+                    <div class="search-suggestions">
+                        <span>Try:</span>
+                        <button class="suggestion" data-keyword="AI Tools">AI Tools</button>
+                        <button class="suggestion" data-keyword="Passive Income">Passive Income</button>
+                        <button class="suggestion" data-keyword="Digital Marketing">Digital Marketing</button>
+                        <button class="suggestion" data-keyword="Health Tech">Health Tech</button>
+                    </div>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <span>10,000+ Users</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-chart-line"></i>
+                        <span>50,000+ Analyses</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-globe"></i>
+                        <span>10+ Languages</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-bolt"></i>
+                        <span>Real-time Data</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="dashboard-preview">
+                    <div class="preview-header">
+                        <div class="preview-tabs">
+                            <span class="tab active">AI Tools Analysis</span>
+                            <span class="tab">Marketing Trends</span>
+                            <span class="tab">Business Ideas</span>
+                        </div>
+                    </div>
+                    <div class="preview-content">
+                        <div class="metric">
+                            <span class="metric-label">Demand Score</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 92%"></div>
+                            </div>
+                            <span class="metric-value">92%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Competition</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 40%"></div>
+                            </div>
+                            <span class="metric-value">Low</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Revenue Potential</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 85%"></div>
+                            </div>
+                            <span class="metric-value">$5K/mo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Silent Demand Finder</h2>
+                <p>Powerful features designed to help you discover hidden opportunities</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Advanced algorithms analyze search patterns, social signals, and market trends.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Monetization Insights</h3>
+                    <p>Get practical monetization ideas with revenue estimates for each opportunity.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Coverage</h3>
+                    <p>Analyze markets worldwide with multi-language support and local insights.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Real-time Data</h3>
+                    <p>Get up-to-date information with our live data processing system.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Privacy Focused</h3>
+                    <p>Your searches are anonymous. We don't sell or share your data.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access from any device with our responsive design and PWA support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Three simple steps to discover hidden opportunities</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Enter Keyword</h3>
+                        <p>Type any topic, niche, or keyword you're interested in exploring.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>AI Analysis</h3>
+                        <p>Our AI analyzes search patterns, social media, forums, and market data.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Get Insights</h3>
+                        <p>Receive detailed analysis with monetization ideas and competition levels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Start Discovering Hidden Opportunities Today</h2>
+            <p>Join thousands of entrepreneurs, creators, and marketers finding profitable niches.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-lg" id="ctaSignup">
+                    <i class="fas fa-rocket"></i> Start Free Trial
+                </button>
+                <button class="btn btn-outline btn-lg" id="ctaDemo">
+                    <i class="fas fa-play-circle"></i> Watch Demo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <i class="fas fa-search"></i>
+                        <span>Silent Demand</span>
+                    </a>
+                    <p class="footer-description">
+                        Discover hidden market demands and monetization opportunities with AI-powered analysis.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-product-hunt"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Product</h3>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="dashboard.html" class="footer-link">Dashboard</a>
+                    <a href="premium.html" class="footer-link">Premium Plans</a>
+                    <a href="#features" class="footer-link">Features</a>
+                    <a href="#how-it-works" class="footer-link">How It Works</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Blog</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">Press</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+                    <a href="terms.html" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Cookie Policy</a>
+                    <a href="#" class="footer-link">GDPR</a>
+                    <a href="#" class="footer-link">Security</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2024 Silent Demand Finder. All rights reserved.
+                </div>
+                <div class="footer-notes">
+                    <span>Made with <i class="fas fa-heart"></i> for entrepreneurs worldwide</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeLogin">&times;</button>
+            <h2>Welcome Back</h2>
+            <p>Sign in to your account</p>
+            
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                
+                <div class="form-options">
+                    <label class="checkbox">
+                        <input type="checkbox" id="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+                
+                <div class="auth-divider">
+                    <span>or continue with</span>
+                </div>
+                
+                <div class="social-auth">
+                    <button type="button" class="btn btn-outline btn-social">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="btn btn-outline btn-social">
+                        <i class="fab fa-github"></i> GitHub
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    Don't have an account? <a href="#" id="switchToSignup">Sign up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeSignup">&times;</button>
+            <h2>Create Account</h2>
+            <p>Start your free trial today</p>
+            
+            <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="John Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="you@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="••••••••" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="
