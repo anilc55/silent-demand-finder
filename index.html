@@ -4,81 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silent Demand Finder - Discover Hidden Opportunities</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Find hidden demand that people search for but don't discuss publicly">
+    <meta name="keywords" content="silent demand, hidden opportunities, monetization, low competition">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- PWA Support -->
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-spinner"></div>
+                <span>Silent Demand Finder</span>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+                <div class="loading-text">Initializing AI Analysis Engine...</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="container">
-            <div class="nav-container">
-                <!-- Logo -->
-                <div class="logo">
-                    <img src="logo.svg" alt="Silent Demand Finder Logo" class="logo-img">
-                    <div class="logo-text">
-                        <span class="logo-main">Silent Demand</span>
-                        <span class="logo-sub">Finder</span>
-                    </div>
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-search-minus"></i>
                 </div>
-
-                <!-- Desktop Menu -->
-                <div class="nav-menu">
-                    <a href="index.html" class="nav-link active">
-                        <i class="fas fa-home"></i> Home
-                    </a>
-                    <a href="pages/dashboard.html" class="nav-link">
-                        <i class="fas fa-chart-line"></i> Dashboard
-                    </a>
-                    <a href="pages/premium.html" class="nav-link">
-                        <i class="fas fa-crown"></i> Premium
-                    </a>
-                    <div class="nav-divider"></div>
-                    <a href="pages/login.html" class="nav-link btn-login">
-                        <i class="fas fa-sign-in-alt"></i> Login
-                    </a>
-                    <a href="pages/login.html" class="btn-primary btn-small">
-                        Sign Up Free
-                    </a>
+                <div class="logo-text">
+                    <span class="logo-main">Silent Demand</span>
+                    <span class="logo-sub">Finder</span>
                 </div>
+            </div>
 
-                <!-- Mobile Menu Button -->
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
+            <!-- Desktop Menu -->
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#dashboard" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#premium" class="nav-link">
+                    <i class="fas fa-crown"></i>
+                    <span>Premium</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="#login" class="nav-link login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </a>
+                <button class="btn-primary btn-nav" onclick="showSignupModal()">
+                    Sign Up Free
                 </button>
             </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
 
         <!-- Mobile Menu -->
-        <div class="mobile-menu">
-            <a href="index.html" class="mobile-nav-link active">
-                <i class="fas fa-home"></i> Home
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home" class="mobile-nav-link active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
             </a>
-            <a href="pages/dashboard.html" class="mobile-nav-link">
-                <i class="fas fa-chart-line"></i> Dashboard
+            <a href="#dashboard" class="mobile-nav-link">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
             </a>
-            <a href="pages/premium.html" class="mobile-nav-link">
-                <i class="fas fa-crown"></i> Premium
+            <a href="#premium" class="mobile-nav-link">
+                <i class="fas fa-crown"></i>
+                <span>Premium</span>
             </a>
-            <a href="pages/login.html" class="mobile-nav-link">
-                <i class="fas fa-sign-in-alt"></i> Login
+            <a href="#login" class="mobile-nav-link">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Login</span>
             </a>
-            <a href="pages/login.html" class="btn-primary btn-full">
+            <button class="btn-primary btn-full" onclick="showSignupModal()">
                 Sign Up Free
-            </a>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    Log jo search kar rahe hain –<br>
-                    <span class="highlight">par openly bol nahi rahe</span>
+                    <span class="title-line">Log jo search kar rahe hain –</span>
+                    <span class="title-line highlight">par openly bol nahi rahe</span>
                 </h1>
                 <p class="hero-subtitle">
                     Discover hidden demand jise monetize kar sakte ho but competition kam hai
@@ -87,33 +114,57 @@
                 <!-- Search Box -->
                 <div class="search-container">
                     <div class="search-box">
-                        <i class="fas fa-search search-icon"></i>
+                        <div class="search-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
                         <input type="text" 
                                id="searchInput" 
                                class="search-input" 
-                               placeholder="Enter a keyword (AI, Jobs, YouTube, Marketing, Fitness...)">
+                               placeholder="Enter a keyword (AI, Jobs, YouTube, Marketing, Fitness...)"
+                               autocomplete="off">
                         <button id="searchBtn" class="search-btn">
-                            <i class="fas fa-bolt"></i> Find Silent Demand
+                            <i class="fas fa-bolt"></i>
+                            <span>Find Silent Demand</span>
                         </button>
                     </div>
-                    <p class="search-hint">
-                        <i class="fas fa-lightbulb"></i> Try: AI, Jobs, YouTube, Marketing, Fitness, Crypto, Health
-                    </p>
+                    <div class="search-suggestions">
+                        <span class="suggestion-label">Trending:</span>
+                        <button class="suggestion-tag" onclick="searchKeyword('AI')">AI</button>
+                        <button class="suggestion-tag" onclick="searchKeyword('YouTube')">YouTube</button>
+                        <button class="suggestion-tag" onclick="searchKeyword('Marketing')">Marketing</button>
+                        <button class="suggestion-tag" onclick="searchKeyword('Crypto')">Crypto</button>
+                        <button class="suggestion-tag" onclick="searchKeyword('Fitness')">Fitness</button>
+                    </div>
                 </div>
 
                 <!-- Quick Stats -->
                 <div class="quick-stats">
-                    <div class="stat">
-                        <span class="stat-number">10,000+</span>
-                        <span class="stat-label">Hidden Keywords</span>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="statKeywords">10,247</div>
+                            <div class="stat-label">Hidden Keywords Found</div>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <span class="stat-number">85%</span>
-                        <span class="stat-label">Low Competition</span>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users-slash"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="statLowComp">85%</div>
+                            <div class="stat-label">Low Competition</div>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <span class="stat-number">₹5L+</span>
-                        <span class="stat-label">Monthly Potential</span>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="statPotential">₹5L+</div>
+                            <div class="stat-label">Monthly Potential</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,52 +174,86 @@
     <!-- Metrics Section -->
     <section class="metrics-section">
         <div class="container">
-            <h2 class="section-title">AI-Powered Analysis Metrics</h2>
-            <p class="section-subtitle">Real-time analysis of search patterns and monetization potential</p>
+            <div class="section-header">
+                <h2 class="section-title">AI-Powered Analysis Metrics</h2>
+                <p class="section-subtitle">Real-time analysis of search patterns and monetization potential</p>
+            </div>
 
             <div class="metrics-grid">
-                <!-- Demand Type Card -->
+                <!-- Demand Type -->
                 <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-eye-slash"></i>
+                    <div class="metric-header">
+                        <div class="metric-icon demand">
+                            <i class="fas fa-eye-slash"></i>
+                        </div>
+                        <div class="metric-title">Demand Type</div>
                     </div>
-                    <h3 class="metric-title">Demand Type</h3>
                     <div class="metric-value">Hidden +</div>
-                    <div class="metric-tag">Silent Search</div>
-                    <p class="metric-desc">People search but don't discuss publicly</p>
+                    <div class="metric-tag silent">Silent Search</div>
+                    <div class="metric-desc">People search but don't discuss publicly</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <div class="progress-label">85% Hidden Demand</div>
+                    </div>
                 </div>
 
-                <!-- Intent Level Card -->
+                <!-- Intent Level -->
                 <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-bullseye"></i>
+                    <div class="metric-header">
+                        <div class="metric-icon intent">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="metric-title">Intent Level</div>
                     </div>
-                    <h3 class="metric-title">Intent Level</h3>
                     <div class="metric-value">High +</div>
-                    <div class="metric-tag">Monetizable</div>
-                    <p class="metric-desc">Strong purchase/search intent detected</p>
+                    <div class="metric-tag monetizable">Monetizable</div>
+                    <div class="metric-desc">Strong purchase/search intent detected</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 92%"></div>
+                        </div>
+                        <div class="progress-label">92% Purchase Intent</div>
+                    </div>
                 </div>
 
-                <!-- Competition Card -->
+                <!-- Competition -->
                 <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-chart-bar"></i>
+                    <div class="metric-header">
+                        <div class="metric-icon competition">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="metric-title">Competition</div>
                     </div>
-                    <h3 class="metric-title">Competition</h3>
                     <div class="metric-value">Low to Medium</div>
-                    <div class="metric-tag">Opportunity</div>
-                    <p class="metric-desc">Few competitors targeting this demand</p>
+                    <div class="metric-tag opportunity">Opportunity</div>
+                    <div class="metric-desc">Few competitors targeting this demand</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 35%"></div>
+                        </div>
+                        <div class="progress-label">35% Competition Score</div>
+                    </div>
                 </div>
 
-                <!-- Status Card -->
+                <!-- Status -->
                 <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-brain"></i>
+                    <div class="metric-header">
+                        <div class="metric-icon status">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="metric-title">Status</div>
                     </div>
-                    <h3 class="metric-title">Status</h3>
                     <div class="metric-value">AI + Real-time</div>
-                    <div class="metric-tag">Live Analysis</div>
-                    <p class="metric-desc">Processing 1000+ data points per second</p>
+                    <div class="metric-tag live">Live Analysis</div>
+                    <div class="metric-desc">Processing 1000+ data points per second</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                        <div class="progress-label">Live Processing</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -177,134 +262,63 @@
     <!-- Findings Section -->
     <section class="findings-section">
         <div class="container">
-            <h2 class="section-title">Silent Demand Findings</h2>
-            <p class="section-subtitle">Discover hidden opportunities across different categories</p>
+            <div class="section-header">
+                <h2 class="section-title">Silent Demand Findings</h2>
+                <p class="section-subtitle">Discover hidden opportunities across different categories</p>
+            </div>
 
-            <div class="findings-grid">
-                <!-- WHY Card -->
-                <div class="finding-card">
-                    <div class="finding-header">
-                        <span class="finding-category">WHY</span>
-                        <div class="finding-icon">
-                            <i class="fas fa-question-circle"></i>
-                        </div>
+            <div class="findings-grid" id="findingsGrid">
+                <!-- Findings will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section (Initially Hidden) -->
+    <section class="results-section" id="resultsSection">
+        <div class="container">
+            <div class="results-header">
+                <h2 class="section-title">Analysis Results</h2>
+                <div class="results-meta">
+                    <span class="keyword-display" id="keywordDisplay">Keyword: AI</span>
+                    <span class="analysis-time" id="analysisTime">Analyzed just now</span>
+                </div>
+            </div>
+
+            <div class="results-content">
+                <!-- Metrics Overview -->
+                <div class="results-metrics">
+                    <div class="result-metric">
+                        <div class="result-metric-value" id="demandScore">8.5</div>
+                        <div class="result-metric-label">Demand Score</div>
                     </div>
-                    <h3 class="finding-title">"AI" ko log search karte hain par openly discuss nahi karte</h3>
-                    <p class="finding-desc">
-                        People feel insecure asking basic AI questions publicly. They secretly search for 
-                        "how to start with AI" but never post in forums or groups.
-                    </p>
-                    <div class="finding-example">
-                        <strong>Example:</strong> "how to learn AI without coding" - 5,400 monthly searches
+                    <div class="result-metric">
+                        <div class="result-metric-value" id="competitionScore">3.2</div>
+                        <div class="result-metric-label">Competition</div>
                     </div>
-                    <button class="finding-btn">
-                        <i class="fas fa-chart-line"></i> View Analysis
-                    </button>
+                    <div class="result-metric">
+                        <div class="result-metric-value" id="monetizationScore">9.1</div>
+                        <div class="result-metric-label">Monetization</div>
+                    </div>
+                    <div class="result-metric">
+                        <div class="result-metric-value" id="trendScore">7.8</div>
+                        <div class="result-metric-label">Trend</div>
+                    </div>
                 </div>
 
-                <!-- HOW Card -->
-                <div class="finding-card">
-                    <div class="finding-header">
-                        <span class="finding-category">HOW</span>
-                        <div class="finding-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
+                <!-- Detailed Analysis -->
+                <div class="detailed-analysis">
+                    <h3 class="analysis-title">Opportunity Breakdown</h3>
+                    <div class="opportunity-list" id="opportunityList">
+                        <!-- Opportunities will be loaded here -->
                     </div>
-                    <h3 class="finding-title">"AI" beginners ke liye step-by-step kaise shuru kare</h3>
-                    <p class="finding-desc">
-                        Complete roadmap missing for absolute beginners. People need hand-holding but 
-                        available content is too technical.
-                    </p>
-                    <div class="finding-example">
-                        <strong>Opportunity:</strong> Create "AI for complete beginners" video series
-                    </div>
-                    <button class="finding-btn">
-                        <i class="fas fa-chart-line"></i> View Analysis
-                    </button>
                 </div>
 
-                <!-- PROBLEM Card -->
-                <div class="finding-card">
-                    <div class="finding-header">
-                        <span class="finding-category">PROBLEM</span>
-                        <div class="finding-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
+                <!-- Action Suggestions -->
+                <div class="action-suggestions">
+                    <h3 class="suggestions-title">Recommended Actions</h3>
+                    <div class="suggestions-grid" id="suggestionsGrid">
+                        <!-- Suggestions will be loaded here -->
                     </div>
-                    <h3 class="finding-title">"AI" se related real problems jo chup-chaap search karee hain</h3>
-                    <p class="finding-desc">
-                        Real problems like "AI not working for my business" or "AI tools too expensive" 
-                        are searched but rarely discussed.
-                    </p>
-                    <div class="finding-example">
-                        <strong>Searches:</strong> 2,800 monthly for "AI problems for small business"
-                    </div>
-                    <button class="finding-btn">
-                        <i class="fas fa-chart-line"></i> View Analysis
-                    </button>
-                </div>
-
-                <!-- COMPARE Card -->
-                <div class="finding-card">
-                    <div class="finding-header">
-                        <span class="finding-category">COMPARE</span>
-                        <div class="finding-icon">
-                            <i class="fas fa-balance-scale"></i>
-                        </div>
-                    </div>
-                    <h3 class="finding-title">"AI" vs alternatives – kaunsa better aur sasta hai</h3>
-                    <p class="finding-desc">
-                        People secretly compare tools but hesitate to ask. They search "ChatGPT vs 
-                        Bard which is better" but don't post comparisons.
-                    </p>
-                    <div class="finding-example">
-                        <strong>Demand:</strong> 8,900 monthly comparison searches
-                    </div>
-                    <button class="finding-btn">
-                        <i class="fas fa-chart-line"></i> View Analysis
-                    </button>
-                </div>
-
-                <!-- MISTAKE Card -->
-                <div class="finding-card">
-                    <div class="finding-header">
-                        <span class="finding-category">MISTAKE</span>
-                        <div class="finding-icon">
-                            <i class="fas fa-times-circle"></i>
-                        </div>
-                    </div>
-                    <h3 class="finding-title">Beginners ki common galtiyan jo paisa aur waqt barbaad karti hain</h3>
-                    <p class="finding-desc">
-                        New learners make expensive mistakes but don't share them. They search for 
-                        solutions quietly after facing issues.
-                    </p>
-                    <div class="finding-example">
-                        <strong>Example:</strong> "AI course scam" - 1,200 monthly searches
-                    </div>
-                    <button class="finding-btn">
-                        <i class="fas fa-chart-line"></i> View Analysis
-                    </button>
-                </div>
-
-                <!-- SECRET Card -->
-                <div class="finding-card">
-                    <div class="finding-header">
-                        <span class="finding-category">SECRET</span>
-                        <div class="finding-icon">
-                            <i class="fas fa-user-secret"></i>
-                        </div>
-                    </div>
-                    <h3 class="finding-title">"AI" ke hidden tricks jo professionals openly nahi batate</h3>
-                    <p class="finding-desc">
-                        Professionals keep lucrative techniques secret. Beginners search for these 
-                        "hidden methods" but can't find reliable information.
-                    </p>
-                    <div class="finding-example">
-                        <strong>Potential:</strong> Premium content opportunity
-                    </div>
-                    <button class="finding-btn">
-                        <i class="fas fa-chart-line"></i> View Analysis
-                    </button>
                 </div>
             </div>
         </div>
@@ -314,28 +328,40 @@
     <section class="cta-section">
         <div class="container">
             <div class="cta-card">
-                <h2 class="cta-title">Start Finding Hidden Demand Today</h2>
-                <p class="cta-text">
-                    Join 5,000+ entrepreneurs and creators who are monetizing silent searches.
-                    No credit card required to start.
-                </p>
-                <div class="cta-buttons">
-                    <button class="btn-primary btn-large">
-                        <i class="fas fa-rocket"></i> Get Started Free
-                    </button>
-                    <button class="btn-secondary btn-large">
-                        <i class="fas fa-play-circle"></i> Watch Demo
-                    </button>
+                <div class="cta-content">
+                    <h2 class="cta-title">Start Finding Hidden Demand Today</h2>
+                    <p class="cta-text">
+                        Join 5,000+ entrepreneurs and creators who are monetizing silent searches.
+                        Get 10 free searches daily. No credit card required.
+                    </p>
+                    <div class="cta-buttons">
+                        <button class="btn-primary btn-large" onclick="showSignupModal()">
+                            <i class="fas fa-rocket"></i>
+                            Get Started Free
+                        </button>
+                        <button class="btn-secondary btn-large" onclick="showDemo()">
+                            <i class="fas fa-play-circle"></i>
+                            Watch Demo
+                        </button>
+                    </div>
+                    <div class="cta-features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>10 free searches per day</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No credit card required</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Cancel anytime</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="cta-features">
-                    <div class="feature">
-                        <i class="fas fa-check-circle"></i> 10 free searches per day
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-check-circle"></i> No credit card required
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-check-circle"></i> Cancel anytime
+                <div class="cta-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-chart-network"></i>
                     </div>
                 </div>
             </div>
@@ -345,60 +371,58 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
-                <!-- Company Info -->
-                <div class="footer-col">
+            <div class="footer-content">
+                <div class="footer-main">
                     <div class="footer-logo">
-                        <img src="logo.svg" alt="Logo" class="footer-logo-img">
-                        <span class="footer-logo-text">Silent Demand Finder</span>
+                        <div class="logo-icon">
+                            <i class="fas fa-search-minus"></i>
+                        </div>
+                        <div class="footer-logo-text">
+                            <span>Silent Demand</span>
+                            <span>Finder</span>
+                        </div>
                     </div>
-                    <p class="footer-about">
-                        We uncover hidden search demand that people don't discuss publicly, 
+                    <p class="footer-description">
+                        We uncover hidden search demand that people don't discuss publicly,
                         helping you find profitable opportunities with low competition.
                     </p>
                     <div class="social-links">
-                        <a href="#" class="social-link">
+                        <a href="#" class="social-link" aria-label="Twitter">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="#" class="social-link" aria-label="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="#" class="social-link" aria-label="YouTube">
                             <i class="fab fa-youtube"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Quick Links -->
-                <div class="footer-col">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <a href="index.html" class="footer-link">Home</a>
-                    <a href="pages/dashboard.html" class="footer-link">Dashboard</a>
-                    <a href="pages/premium.html" class="footer-link">Premium Features</a>
-                    <a href="#" class="footer-link">Case Studies</a>
-                    <a href="#" class="footer-link">API Documentation</a>
-                </div>
-
-                <!-- Tools -->
-                <div class="footer-col">
-                    <h3 class="footer-title">Tools</h3>
-                    <a href="#" class="footer-link">Demand Analyzer</a>
-                    <a href="#" class="footer-link">Competition Checker</a>
-                    <a href="#" class="footer-link">Trend Finder</a>
-                    <a href="#" class="footer-link">Keyword Researcher</a>
-                    <a href="#" class="footer-link">Market Gap Finder</a>
-                </div>
-
-                <!-- Contact -->
-                <div class="footer-col">
-                    <h3 class="footer-title">Contact</h3>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> support@silentdemandfinder.com</p>
-                        <p><i class="fas fa-globe"></i> www.silentdemandfinder.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Remote Team · Worldwide</p>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3 class="footer-title">Product</h3>
+                        <a href="#home" class="footer-link">Home</a>
+                        <a href="#dashboard" class="footer-link">Dashboard</a>
+                        <a href="#premium" class="footer-link">Premium</a>
+                        <a href="#" class="footer-link">API</a>
+                    </div>
+                    <div class="footer-column">
+                        <h3 class="footer-title">Resources</h3>
+                        <a href="#" class="footer-link">Documentation</a>
+                        <a href="#" class="footer-link">Tutorials</a>
+                        <a href="#" class="footer-link">Blog</a>
+                        <a href="#" class="footer-link">Case Studies</a>
+                    </div>
+                    <div class="footer-column">
+                        <h3 class="footer-title">Company</h3>
+                        <a href="#" class="footer-link">About</a>
+                        <a href="#" class="footer-link">Contact</a>
+                        <a href="#" class="footer-link">Privacy</a>
+                        <a href="#" class="footer-link">Terms</a>
                     </div>
                 </div>
             </div>
@@ -407,18 +431,8 @@
                 <p class="copyright">
                     © 2023 Silent Demand Finder • Free Tool Now • Premium Unlock Coming Soon
                 </p>
-                <div class="footer-links">
-                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
-                    <a href="#" class="footer-bottom-link">Terms of Service</a>
-                    <a href="#" class="footer-bottom-link">Cookie Policy</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/search.js"></script>
-</body>
-                                                            </html>
+                <div class="footer-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="scroll-top" onclick="scrollToTop()" aria-labe
